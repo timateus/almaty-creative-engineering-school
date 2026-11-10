@@ -10,8 +10,9 @@
   :root { --paper: #f4f5f3; --ink: #1b1b1b; --gray: #67645c; --red: #e8452a; --yellow: #f2b632; --pink: #ee95b4; --blue: #2c4fb8; }
   * { box-sizing: border-box; }
   body { margin: 0; background: #ccc; font-family: 'Onest', Arial, sans-serif; color: var(--ink); }
-  .slide { position: relative; width: 1080px; height: 1350px; background: var(--paper); padding: 96px 90px; overflow: hidden; display: flex; flex-direction: column; margin: 0 auto 24px; }
+  .slide { position: relative; width: 1080px; height: 1350px; background: var(--paper); padding: 150px 90px 96px; overflow: hidden; display: flex; flex-direction: column; margin: 0 auto 24px; }
   .solo .slide { margin: 0; }
+  .slide::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 60px; background: url('../img/chiy-tile.svg') repeat-x left center; background-size: auto 100%; }
   h1, h2 { font-family: 'Unbounded', 'Onest', sans-serif; font-weight: 500; margin: 0; letter-spacing: -.03em; line-height: 1.12; text-wrap: balance; }
   h1 { font-size: 104px; }
   h2 { font-size: 72px; }
