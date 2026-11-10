@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[NAME]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: rgba(0,0,0,.88); --gray: #6f6f6f; --bg: #fff; --g: 16px; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px; line-height: 1.3; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: var(--g); padding: 0 var(--g); }
+  .big { font-size: 19px; line-height: 1.2; }
+  .gray { color: var(--gray); }
+  .small p { margin: 0 0 1px; }
+  .r { text-align: right; }
+
+  .top { padding-top: var(--g); }
+  .hero { min-height: calc(100vh - 120px); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--g) 8px; }
+  .hero h1 { margin: 0 0 28px; font-weight: 500; letter-spacing: -.045em; line-height: .93; font-size: clamp(48px, 10.5vw, 168px); max-width: 10ch; }
+  .hero .sub { font-size: 19px; line-height: 1.25; max-width: 520px; }
+
+  .row { border-top: 1px solid #111; margin-top: 56px; padding-top: 14px; }
+  .row .head { align-items: baseline; margin-bottom: 36px; }
+  .row .head .big { font-size: 22px; }
+  .row .body { align-items: start; }
+  .txt { max-width: 320px; }
+  .txt .k { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 4px; }
+  .txt p { margin: 0 0 16px; }
+  .txt .inst { color: var(--gray); }
+  .fig { aspect-ratio: 5/4; position: relative; overflow: hidden; }
+  .fig.main { grid-column: 2 / 4; }
+  .keep { font-size: 13px; }
+  .keep .k { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 4px; }
+  .keep p { margin: 0 0 16px; }
+  .shape { position: absolute; }
+
+  .sec { border-top: 1px solid #111; margin-top: 80px; padding-top: 14px; }
+  .sec .name { font-size: 22px; }
+  .list .li { border-top: 1px solid #e2e2e2; padding: 10px 0 12px; }
+  .list .li:first-child { border-top: 0; padding-top: 0; }
+  .btn { display: inline-block; background: #d6296b; color: #fff; font-size: 16px; font-weight: 500; line-height: 1.2; padding: 16px 22px; }
+  .btn:hover { text-decoration: none; background: #b81f58; }
+  .cta { font-size: 22px; letter-spacing: -.01em; }
+  footer { margin-top: 120px; padding-bottom: 20px; }
+
+  .row.ex { margin-top: 32px; padding-top: 12px; }
+  .row.ex .head { margin-bottom: 14px; }
+  .row.ex .head .big { font-size: 19px; }
+  .row.ex .txt { grid-column: 1 / 3; max-width: 560px; }
+  .row.ex .txt p { margin: 0 0 8px; }
+  .row.ex .fig.main { grid-column: 4; width: 96px; aspect-ratio: 1; justify-self: end; }
+
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: repeat(2, 1fr); row-gap: 14px; }
+    .top .r { text-align: left; }
+    .row .head > :nth-child(3) { grid-column: 1 / -1; }
+    .fig.main { grid-column: 1 / -1; order: -1; }
+    .txt { max-width: none; }
+    .sec .list, .sec .cta { grid-column: 1 / -1 !important; }
+    .hero { min-height: 70vh; }
+    .row.ex .txt { grid-column: 1 / -1; }
+    .row.ex .fig.main { grid-column: 1 / -1; width: 72px; justify-self: start; order: 2; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid top small">
+  <div>[NAME]</div>
+  <div class="big">Art + Science<br><span class="gray">Education bureau</span></div>
+  <div><p>For museums, schools,</p><p>artists, companies</p><p>and children's groups</p></div>
+  <div class="r"><a href="#hire">Hire us</a>, <a href="mailto:">Email</a>, <a href="#">Telegram</a> ↗<br><span style="display:inline-block;margin-top:6px"><span>EN</span> / <a href="site-ru.html" class="gray">RU</a></span></div>
+</div>
+
+<section class="hero">
+  <h1>Art and science education.</h1>
+  <div class="sub">We design and run workshops and courses for museums, schools, artists, companies and groups of kids, teens and adults.</div>
+</section>
+
+<!-- TRACKS AND SPECIFIC PROGRAMS -->
+
+<!-- CTA -->
+<div id="hire" style="margin-top:96px;padding:0 var(--g);text-align:center">
+  <a href="mailto:" class="btn">Hire us to design a course for your museum, school or team&nbsp;→</a>
+</div>
+
+<div class="grid" style="margin-top:80px">
+  <div class="name big" style="font-size:22px">Tracks</div>
+  <div></div>
+  <div class="gray" style="grid-column: 3 / 5; max-width:420px">Formats we can run anywhere.</div>
+</div>
+
+<div class="row">
+  <div class="grid head">
+    <div class="big">01</div>
+    <div class="big gray">Robotics &amp; Art</div>
+    <div class="small"><p>Workshop, course</p><p>Teens and adults</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>Robotics as a way of making art. Participants design, build and program small robots, learning how motors, sensors and microcontrollers work and how to get from a rough idea to a working prototype. Here a robot is a character and a statement as much as a machine: it has a shape, a way of moving and a way of reacting. Teams of three work around a theme such as ecology, music, the body or the city.</p>
+    </div>
+    <div class="fig main" style="background:transparent;box-shadow:inset 0 0 0 1px #e6e6e6"><div class="shape" style="width:46%;aspect-ratio:1;border-radius:50%;background:rgba(214,41,107,.35);right:12%;bottom:14%"></div><div class="shape" style="left:12%;top:16%;width:30%;height:10%;background:rgba(214,41,107,.7)"></div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="grid head">
+    <div class="big">02</div>
+    <div class="big gray">Creative Coding</div>
+    <div class="small"><p>Workshop, course</p><p>From age 8</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A course on using code as an artistic material. Participants write short programs that generate images, motion and sound, and learn the basics of programming along the way: variables, loops, randomness, interaction. Each person builds a small series of generative works of their own.</p>
+    </div>
+    <div class="fig main" style="background:transparent;box-shadow:inset 0 0 0 1px #e6e6e6"><div class="shape" style="inset:18% 40% 18% 14%;background:rgba(214,41,107,.22);transform:skewX(-12deg)"></div><div class="shape" style="width:32%;aspect-ratio:1;border-radius:50%;background:rgba(214,41,107,.5);right:14%;top:22%"></div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="grid head">
+    <div class="big">03</div>
+    <div class="big gray">AI for Artists</div>
+    <div class="small"><p>Workshop</p><p>Teens and adults</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A workshop on working with neural networks as an artistic tool. Participants generate images, text and sound, learn how these models are trained and where they go wrong, and build their own working method. Each person makes a work with AI.</p>
+    </div>
+    <div class="fig main" style="background:transparent;box-shadow:inset 0 0 0 1px #e6e6e6"><div class="shape" style="width:44%;aspect-ratio:1;border-radius:50%;background:rgba(214,41,107,.3);left:12%;top:16%"></div><div class="shape" style="width:44%;aspect-ratio:1;border-radius:50%;background:rgba(214,41,107,.3);left:34%;top:34%"></div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="grid head">
+    <div class="big">04</div>
+    <div class="big gray">Maps, Ecology, Cities</div>
+    <div class="small"><p>Field work, workshop</p><p>All ages</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A field workshop on making maps of the place where we live. Participants walk a district, record its sounds, talk to residents and collect open data, then put it all on one map. We look at how maps are made, what they show and what they leave out.</p>
+    </div>
+    <div class="fig main" style="background:transparent;box-shadow:inset 0 0 0 1px #e6e6e6"><div class="shape" style="width:60%;height:60%;border:1.5px solid rgba(214,41,107,.55);border-radius:50%;left:20%;top:20%"></div><div class="shape" style="width:30%;height:30%;border:1.5px solid rgba(214,41,107,.55);border-radius:50%;left:35%;top:35%"></div><div class="shape" style="width:8%;aspect-ratio:1;background:rgb(214,41,107);border-radius:50%;left:46%;top:46%"></div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="grid head">
+    <div class="big">05</div>
+    <div class="big gray">Sensors &amp; Data</div>
+    <div class="small"><p>Workshop, course</p><p>Teens and adults</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A workshop on building an instrument and reading what it measures. Participants assemble an air-quality sensor, take measurements around the neighbourhood and analyse the data together, learning the basics of electronics, microcontrollers and data analysis.</p>
+    </div>
+    <div class="fig main" style="background:transparent;box-shadow:inset 0 0 0 1px #e6e6e6"><div class="shape" style="left:14%;right:14%;bottom:20%;height:2px;background:rgba(214,41,107,.5)"></div><div class="shape" style="left:20%;width:8%;height:30%;bottom:20%;background:rgba(214,41,107,.3)"></div><div class="shape" style="left:34%;width:8%;height:52%;bottom:20%;background:rgba(214,41,107,.3)"></div><div class="shape" style="left:48%;width:8%;height:22%;bottom:20%;background:rgba(214,41,107,.3)"></div><div class="shape" style="left:62%;width:8%;height:42%;bottom:20%;background:rgba(214,41,107,.7)"></div></div>
+  </div>
+</div>
+
+<div class="grid" style="margin-top:80px">
+  <div class="name big" style="font-size:22px">Example courses</div>
+  <div></div>
+  <div class="big" style="grid-column: 3 / 5"><a href="courses-en.html">See examples of courses built for a museum or a group of artists ↗</a></div>
+</div>
+
+<div class="grid" style="margin-top:32px">
+  <div class="name big" style="font-size:22px">For companies</div>
+  <div></div>
+  <div class="big" style="grid-column: 3 / 5"><a href="companies-en.html">Learning, team events and sponsoring programs ↗</a></div>
+</div>
+
+<!-- MORE PROGRAMS -->
+<div class="sec">
+  <div class="grid">
+    <div class="name">Also</div>
+    <div></div>
+    <div class="list" style="grid-column: 3 / 5">
+      <div class="li"><div class="big">Digital Fabrication</div><div class="gray">TouchDesigner, 3D scanning, video games with AI.</div></div>
+      <div class="li"><div class="big">Top-University Prep</div><div class="gray">A research project of your own, a portfolio, and the skill of presenting it. For high schoolers and applicants.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GROUPS -->
+<div class="sec">
+  <div class="grid">
+    <div class="name">Groups</div>
+    <div></div>
+    <div class="list" style="grid-column: 3 / 5">
+      <div class="li"><div class="big">Museums &amp; institutions</div><div class="gray">Programs for exhibitions, public programs, summer schools and labs. We connect your institution with its public and with experts, build a community around your programme, and leave you with things you can keep: archives, maps, collections. Your audience learns, and artists and experts grow with it. A good programme also gives you something to tell: press, social media, partners and government.</div></div>
+      <div class="li"><div class="big">Schools &amp; universities</div><div class="gray">Modules and seminars for design, urbanism, computer science and art courses. Project-based programs that combine art, science and technology: students learn to work across disciplines, build things and think creatively, and meet museums and industry. For older students, a real project and a portfolio that strengthen applications to top universities.</div></div>
+      <div class="li"><div class="big">Artists</div><div class="gray">Workshops on archiving and portfolios.</div></div>
+      <div class="li"><div class="big">Companies</div><div class="gray">Team workshops: data, AI, creative thinking.</div></div>
+      <div class="li"><div class="big">Children, teens, adults</div><div class="gray">Open groups, small, each with a project at the end.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="sec">
+  <div class="grid">
+    <div class="name">Projects</div>
+    <div></div>
+    <div class="big" style="grid-column: 3 / 5; line-height:1.3">We have worked with
+      Tselinny Center for Contemporary Art,
+      inVisionU,
+      American Space,
+      Urbanitarium,
+      Aral Culture Summit,
+      Dump Gallery and others.</div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="sec">
+  <div class="grid">
+    <div class="name">Contact</div>
+    <div></div>
+    <div class="cta" style="grid-column: 3 / 5"><a href="mailto:">[email]</a><br><a href="#">[telegram]</a></div>
+  </div>
+</div>
+
+<footer>
+  <div class="grid small">
+    <div>[NAME] © 2026</div><div></div><div></div><div class="r"><a href="#">Top</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

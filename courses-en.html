@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[NAME]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: rgba(0,0,0,.88); --gray: #6f6f6f; --bg: #fff; --g: 16px; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px; line-height: 1.3; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: var(--g); padding: 0 var(--g); }
+  .big { font-size: 19px; line-height: 1.2; }
+  .gray { color: var(--gray); }
+  .small p { margin: 0 0 1px; }
+  .r { text-align: right; }
+
+  .top { padding-top: var(--g); }
+  .hero { min-height: calc(100vh - 120px); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--g) 8px; }
+  .hero h1 { margin: 0 0 28px; font-weight: 500; letter-spacing: -.045em; line-height: .93; font-size: clamp(48px, 10.5vw, 168px); max-width: 10ch; }
+  .hero .sub { font-size: 19px; line-height: 1.25; max-width: 520px; }
+
+  .row { border-top: 1px solid #111; margin-top: 56px; padding-top: 14px; }
+  .row .head { align-items: baseline; margin-bottom: 36px; }
+  .row .head .big { font-size: 22px; }
+  .row .body { align-items: start; }
+  .txt { max-width: 250px; }
+  .txt .k { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 4px; }
+  .txt p { margin: 0 0 16px; }
+  .txt .inst { color: var(--gray); }
+  .fig { aspect-ratio: 5/4; position: relative; overflow: hidden; }
+  .fig.main { grid-column: 2 / 4; }
+  .keep { font-size: 13px; }
+  .keep .k { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 4px; }
+  .keep p { margin: 0 0 16px; }
+  .shape { position: absolute; }
+
+  .sec { border-top: 1px solid #111; margin-top: 80px; padding-top: 14px; }
+  .sec .name { font-size: 22px; }
+  .list .li { border-top: 1px solid #e2e2e2; padding: 10px 0 12px; }
+  .list .li:first-child { border-top: 0; padding-top: 0; }
+  .cta { font-size: 22px; letter-spacing: -.01em; }
+  footer { margin-top: 120px; padding-bottom: 20px; }
+
+  .row.ex { margin-top: 32px; padding-top: 12px; }
+  .row.ex .head { margin-bottom: 14px; }
+  .row.ex .head .big { font-size: 19px; }
+  .row.ex .txt { grid-column: 1 / 3; max-width: 560px; }
+  .row.ex .txt p { margin: 0 0 8px; }
+  .row.ex .fig.main { grid-column: 4; width: 96px; aspect-ratio: 1; justify-self: end; }
+
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: repeat(2, 1fr); row-gap: 14px; }
+    .top .r { text-align: left; }
+    .row .head > :nth-child(3) { grid-column: 1 / -1; }
+    .fig.main { grid-column: 1 / -1; order: -1; }
+    .txt { max-width: none; }
+    .sec .list, .sec .cta { grid-column: 1 / -1 !important; }
+    .hero { min-height: 70vh; }
+    .row.ex .txt { grid-column: 1 / -1; }
+    .row.ex .fig.main { grid-column: 1 / -1; width: 72px; justify-self: start; order: 2; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid top small">
+  <div><a href="site-en.html">← [NAME]</a></div>
+  <div class="big">Art + Science<br><span class="gray">Education bureau</span></div>
+  <div><p>For museums, schools,</p><p>artists, companies</p><p>and children's groups</p></div>
+  <div class="r"><a href="site-en.html#hire">Hire us</a>, <a href="mailto:">Email</a>, <a href="#">Telegram</a> ↗<br><span style="display:inline-block;margin-top:6px"><span>EN</span> / <a href="courses-ru.html" class="gray">RU</a></span></div>
+</div>
+
+<section style="padding: 120px var(--g) 24px">
+  <h1 style="margin:0 0 16px;font-weight:500;letter-spacing:-.04em;line-height:.95;font-size:clamp(40px,7vw,96px)">Example courses</h1>
+  <div class="big" style="max-width:520px">Examples of what we build for a specific museum or group of artists.</div>
+</section>
+
+<div class="row ex">
+  <div class="grid head">
+    <div class="big">01</div>
+    <div class="big gray">3D Scan: Glitch &amp; Memory</div>
+    <div class="small"><p>Workshop</p><p>For museums</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A workshop on scanning sculpture and on what goes wrong in the process. Participants scan works from an exhibition, keep the glitches, holes and stitched pieces, and build a new piece from the fragments. We talk about archiving and memory, and about what a record keeps and what it loses.</p>
+      <p class="gray">Result: a 3D archive of the exhibition, and the participants' assemblies.</p>
+    </div>
+    <div class="fig main" style="background:#d6296b"><div class="shape" style="inset:16% 52% 16% 14%;background:#111"></div><div class="shape" style="width:30%;aspect-ratio:1;border-radius:50%;background:#ffb400;right:14%;top:18%"></div><div class="shape" style="width:30%;height:3px;background:#fff;right:14%;bottom:30%"></div></div>
+  </div>
+</div>
+
+<div class="row ex">
+  <div class="grid head">
+    <div class="big">02</div>
+    <div class="big gray">Museum Surfaces</div>
+    <div class="small"><p>Workshop</p><p>For museums</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A workshop on the surfaces of a museum building. Participants sample walls, floors and objects with a scanner, microscope, endoscope and clay casts, then assemble a new piece from the samples. Wear, cracks and repairs become an archive of the building, and the errors of each instrument stay in it.</p>
+      <p class="gray">Result: a texture library of the building, and the participants' assemblies.</p>
+    </div>
+    <div class="fig main" style="background:#ffb400"><div class="shape" style="left:10%;top:14%;width:36%;aspect-ratio:1;border:2px solid #111;border-radius:50%"></div><div class="shape" style="left:30%;top:30%;width:36%;aspect-ratio:1;background:#111;border-radius:50%;opacity:.9"></div><div class="shape" style="right:10%;bottom:12%;width:24%;aspect-ratio:1;background:#d6296b"></div></div>
+  </div>
+</div>
+
+<div class="row ex">
+  <div class="grid head">
+    <div class="big">03</div>
+    <div class="big gray">Making Friends with Plants</div>
+    <div class="small"><p>Field workshop</p><p>For museums, schools</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A field workshop on getting to know the plants around us. Participants walk the grounds, identify the plants with field guides and apps, and make their own set of plant cards. A field guide is also an instrument with its own assumptions, and we look at them.</p>
+      <p class="gray">Result: a map and species list of the grounds.</p>
+    </div>
+    <div class="fig main" style="background:#00a878"><div class="shape" style="left:20%;bottom:0;width:8%;height:70%;background:#fff"></div><div class="shape" style="left:14%;top:12%;width:20%;aspect-ratio:1;border-radius:0 100% 0 100%;background:#ffb400"></div><div class="shape" style="left:44%;bottom:0;width:8%;height:48%;background:#111"></div><div class="shape" style="left:38%;top:36%;width:20%;aspect-ratio:1;border-radius:100% 0 100% 0;background:#fff"></div></div>
+  </div>
+</div>
+
+<div class="row ex">
+  <div class="grid head">
+    <div class="big">04</div>
+    <div class="big gray">AI Tools for Self-Archiving</div>
+    <div class="small"><p>Workshop</p><p>For artists</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A workshop for artists on putting a practice in order. Participants use AI tools to describe, tag and connect their works and documentation into a personal archive, and check what the AI gets wrong or makes up along the way.</p>
+      <p class="gray">Result: a personal archive and a routine to keep it.</p>
+    </div>
+    <div class="fig main" style="background:#2b5cff"><div class="shape" style="left:12%;top:14%;width:34%;height:22%;background:#fff"></div><div class="shape" style="left:12%;top:42%;width:50%;height:22%;background:#ffb400"></div><div class="shape" style="left:12%;top:70%;width:22%;height:14%;background:#111"></div></div>
+  </div>
+</div>
+
+<div class="row ex">
+  <div class="grid head">
+    <div class="big">05</div>
+    <div class="big gray">AI Tools for Portfolio</div>
+    <div class="small"><p>Workshop</p><p>For artists</p></div>
+    <div></div>
+  </div>
+  <div class="grid body">
+    <div class="txt">
+      <p>A workshop for artists on building a portfolio with AI tools: texts about works, a statement, a CV, a site or a PDF. We look at what AI does to the language of an artist's text and how to keep your own voice.</p>
+      <p class="gray">Result: a finished portfolio.</p>
+    </div>
+    <div class="fig main" style="background:#ff6a3d"><div class="shape" style="left:16%;top:16%;width:44%;height:68%;background:#fff"></div><div class="shape" style="left:26%;top:26%;width:24%;height:4%;background:#111"></div><div class="shape" style="left:26%;top:36%;width:24%;height:4%;background:#111"></div><div class="shape" style="right:14%;bottom:16%;width:26%;aspect-ratio:1;border-radius:50%;background:#111"></div></div>
+  </div>
+</div>
+
+
+
+<footer>
+  <div class="grid small">
+    <div>[NAME] © 2026</div><div></div><div></div><div class="r"><a href="site-en.html">Back</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
