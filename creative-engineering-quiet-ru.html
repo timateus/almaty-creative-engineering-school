@@ -45,6 +45,13 @@
   .weeks span { color: var(--gray); font-size: 16px; }
   .note { font-size: 14px; color: var(--gray); margin: 8px 0 0; }
   .body p { margin: 0 0 16px; max-width: 30em; }
+  .people { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .person img, .person .ph { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; display: block; margin: 0 0 16px; }
+  .person .ph { position: relative; background: var(--pink); overflow: hidden; }
+  .person .ph i { position: absolute; width: 56%; aspect-ratio: 1; border-radius: 50%; background: var(--yellow); right: -8%; top: -10%; }
+  .person .ph span { position: absolute; left: 14px; bottom: 12px; font-size: 14px; color: var(--ink); }
+  .person h3 { font-family: 'Onest', sans-serif; font-weight: 500; font-size: 24px; letter-spacing: -.01em; margin: 0 0 8px; }
+  .person p { margin: 0; font-size: 16px; line-height: 1.55; }
   dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 28px; }
   dt { color: var(--gray); }
   dd { margin: 0; }
@@ -59,6 +66,7 @@
     section { grid-template-columns: 1fr; gap: 12px; margin-top: 64px; }
     .weeks li { grid-template-columns: 20px 1fr; row-gap: 0; }
     .weeks span { grid-column: 2; }
+    .people { grid-template-columns: 1fr; gap: 36px; }
     dl { grid-template-columns: 1fr; gap: 0; }
     dd { margin-bottom: 10px; }
   }
@@ -109,6 +117,22 @@
   <div class="body">
     <p>Курс о технологиях с гуманитарным углом: мы смотрим на них как инженеры, художники и критики. Каждую неделю новый инструмент и небольшая работа.</p>
     <p>Итоговые проекты публикуются в нашей онлайн-галерее.</p>
+  </div>
+</section>
+
+<section id="team">
+  <h2>Ведущие</h2>
+  <div class="people">
+    <article class="person">
+      <img src="img/timofey-nosov.jpg" alt="Тимофей Носов" width="900" height="900">
+      <h3>Тимофей Носов</h3>
+      <p>Инженер, исследователь и преподаватель. Несколько лет руководил командами аналитиков данных в Yandex и работал над Яндекс Картами, а сегодня делает образовательные программы на стыке технологий и искусства: курс по робототехнике с художником в ЦСИ «Целинный», проекты 101 Dump Gallery, Aral School в Нукусе. Учился в Simon Fraser University.</p>
+    </article>
+    <article class="person">
+      <div class="ph" role="img" aria-label="Фото Iris Kazhmurat будет добавлено"><i></i><span>[фото]</span></div>
+      <h3>Iris Kazhmurat</h3>
+      <p>Родом из Алматы, окончила бакалавриат по изобразительному искусству (BFA); дополнительно изучала бизнес и историю искусства. Любимый материал — акрил. Вдохновляется Кандинским, Ротко и Моне.</p>
+    </article>
   </div>
 </section>
 
