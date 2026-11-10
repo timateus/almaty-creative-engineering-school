@@ -10,9 +10,8 @@
   :root { --paper: #f4f5f3; --ink: #1b1b1b; --gray: #67645c; --red: #e8452a; --yellow: #f2b632; --pink: #ee95b4; --blue: #2c4fb8; }
   * { box-sizing: border-box; }
   body { margin: 0; background: #ccc; font-family: 'Onest', Arial, sans-serif; color: var(--ink); }
-  .slide { position: relative; width: 1080px; height: 1350px; background: var(--paper); padding: 150px 90px 96px; overflow: hidden; display: flex; flex-direction: column; margin: 0 auto 24px; }
+  .slide { position: relative; width: 1080px; height: 1350px; background: var(--paper); padding: 96px 90px; overflow: hidden; display: flex; flex-direction: column; margin: 0 auto 24px; }
   .solo .slide { margin: 0; }
-  .slide::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 60px; background: url('../img/weave-band.svg') repeat-x left center; background-size: auto 100%; }
   h1, h2 { font-family: 'Unbounded', 'Onest', sans-serif; font-weight: 500; margin: 0; letter-spacing: -.03em; line-height: 1.12; text-wrap: balance; }
   h1 { font-size: 104px; }
   h2 { font-size: 72px; }
@@ -24,7 +23,7 @@
   /* 1 cover */
   .cover h1 { margin-top: 24px; }
   .cover .lead { margin-top: 36px; max-width: 760px; }
-  .cover .art { position: absolute; right: 90px; bottom: 140px; width: 560px; height: auto; }
+  .cover svg { position: absolute; right: 70px; bottom: 150px; width: 520px; height: auto; }
 
   /* 3 weeks */
   .weeks { list-style: none; padding: 0; margin: 64px 0 0; }
@@ -61,7 +60,14 @@
 <section class="slide cover" data-n="1">
   <h1>Креативная инженерия</h1>
   <p class="lead">Онлайн-курс для подростков <span style="white-space:nowrap">14–19 лет</span>. Пять недель, пять тем и свой проект в&nbsp;конце.</p>
-  <img class="art" src="../img/weave-panel.svg" alt="" aria-hidden="true">
+  <svg viewBox="0 0 300 300" aria-hidden="true">
+    <line x1="30" y1="26" x2="270" y2="26" stroke="#1b1b1b" stroke-width="1.6"/>
+    <line x1="150" y1="26" x2="150" y2="6" stroke="#1b1b1b" stroke-width="1.2"/>
+    <line x1="60" y1="26" x2="60" y2="130" stroke="#1b1b1b"/><circle cx="60" cy="146" r="16" fill="#e8452a"/>
+    <line x1="130" y1="26" x2="130" y2="210" stroke="#1b1b1b"/><circle cx="130" cy="236" r="26" fill="#fff" stroke="#1b1b1b" stroke-width="1.4"/>
+    <line x1="200" y1="26" x2="200" y2="96" stroke="#1b1b1b"/><path d="M200 96 l-16 28 h32 z" fill="#2c4fb8"/>
+    <line x1="246" y1="26" x2="246" y2="170" stroke="#1b1b1b"/><circle cx="246" cy="184" r="14" fill="#f2b632"/>
+  </svg>
   <div class="foot"><span>[ШКОЛА]</span><span>1 / 6 →</span></div>
 </section>
 

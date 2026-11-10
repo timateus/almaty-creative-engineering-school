@@ -24,20 +24,22 @@
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 var(--g); }
   .gray { color: var(--gray); }
 
+  .cursor-dot { position: fixed; left: 0; top: 0; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--red); pointer-events: none; z-index: 3000; opacity: 0; will-change: transform; }
+  .cursor-dot.on { opacity: 1; }
+  @media (hover: none), (pointer: coarse) { .cursor-dot { display: none; } }
   nav { display: flex; justify-content: space-between; gap: 16px; padding: var(--g) 0; font-size: 15px; }
   nav .links { display: flex; gap: 22px; }
 
   .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; min-height: 74vh; padding: 40px 0 64px; }
   h1 { font-family: 'Unbounded', 'Onest', sans-serif; font-weight: 500; font-size: clamp(28px, 4.2vw, 56px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 28px; text-wrap: balance; }
   .hero p { margin: 0; max-width: 24em; font-size: 20px; }
-  .art img { width: 100%; height: auto; display: block; }
+  .art svg { width: 100%; height: auto; max-height: 70vh; }
   .sway { transform-box: fill-box; transform-origin: 50% 0%; animation: sway 8s ease-in-out infinite; }
   .sway.b { animation-duration: 10s; animation-delay: -4s; }
   @keyframes sway { 0%,100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
   @media (prefers-reduced-motion: reduce) { .sway { animation: none; } html { scroll-behavior: auto; } }
 
-  .chiy { height: 64px; margin-top: 8px; background: url('img/weave-band.svg') repeat-x left center; background-size: auto 100%; }
-  section { border-top: 1px solid var(--ink); padding: 20px 0 0; margin-top: 88px; display: grid; grid-template-columns: 1fr 2fr; gap: var(--g); }
+  section { padding: 20px 0 0; margin-top: 88px; display: grid; grid-template-columns: 1fr 2fr; gap: var(--g); }
   h2 { font-family: 'Onest', sans-serif; font-weight: 500; font-size: 15px; margin: 4px 0 0; color: var(--gray); }
   .weeks { margin: 0; padding: 0; list-style: none; }
   .weeks li { display: grid; grid-template-columns: 22px 1fr 1fr; gap: 16px; align-items: baseline; padding: 0 0 18px; }
@@ -86,10 +88,17 @@
     <h1>Креативная инженерия</h1>
     <p>Онлайн-курс для подростков <span style="white-space:nowrap">14–19 лет</span>. Пять недель, пять тем и свой проект в конце.</p>
   </div>
-  <div class="art" aria-hidden="true"><img src="img/weave-panel.svg" alt="" width="900" height="900"></div>
+  <div class="art" aria-hidden="true">
+    <svg viewBox="0 0 300 290" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="26" x2="270" y2="26" stroke="#1b1b1b" stroke-width="1.6"/>
+      <line x1="150" y1="26" x2="150" y2="6" stroke="#1b1b1b" stroke-width="1.2"/>
+      <g class="sway"><line x1="60" y1="26" x2="60" y2="130" stroke="#1b1b1b"/><circle cx="60" cy="146" r="16" fill="#e8452a"/></g>
+      <g class="sway b"><line x1="130" y1="26" x2="130" y2="210" stroke="#1b1b1b"/><circle cx="130" cy="236" r="26" fill="#fff" stroke="#1b1b1b" stroke-width="1.4"/></g>
+      <g class="sway"><line x1="200" y1="26" x2="200" y2="96" stroke="#1b1b1b"/><path d="M200 96 l-16 28 h32 z" fill="#2c4fb8"/></g>
+      <g class="sway b"><line x1="246" y1="26" x2="246" y2="170" stroke="#1b1b1b"/><circle cx="246" cy="184" r="14" fill="#f2b632"/></g>
+    </svg>
+  </div>
 </header>
-
-<div class="chiy" role="presentation"></div>
 
 <section id="program">
   <h2>Программа</h2>
@@ -146,9 +155,20 @@
 <footer>
   <div>[ШКОЛА] · Creative Engineering School</div>
   <div>Бюро Art + STEM</div>
-  <div style="flex-basis:100%">Орнамент по мотивам шым ши, традиционных тростниковых циновок.</div>
 </footer>
 
 </div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<script>
+  (function () {
+    var dot = document.querySelector('.cursor-dot');
+    if (!dot || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    window.addEventListener('mousemove', function (e) {
+      dot.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+      dot.classList.add('on');
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', function () { dot.classList.remove('on'); });
+  })();
+</script>
 </body>
 </html>
