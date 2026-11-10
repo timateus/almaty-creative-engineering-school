@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f5f3; --ink: #1b1b1b; --gray: #67645c;
+    --red: #e8452a; --yellow: #f2b632; --pink: #ee95b4; --blue: #2c4fb8;
+    --g: 24px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--yellow); }
+  a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+  svg { display: block; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 var(--g); }
+  .gray { color: var(--gray); }
+
+  nav { display: flex; justify-content: space-between; gap: 16px; padding: var(--g) 0; font-size: 15px; }
+  nav .links { display: flex; gap: 22px; }
+
+  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; min-height: 74vh; padding: 40px 0 64px; }
+  h1 { font-family: 'Unbounded', 'Onest', sans-serif; font-weight: 500; font-size: clamp(28px, 4.2vw, 56px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 28px; text-wrap: balance; }
+  .hero p { margin: 0; max-width: 24em; font-size: 20px; }
+  .art svg { width: 100%; height: auto; max-height: 70vh; }
+  .sway { transform-box: fill-box; transform-origin: 50% 0%; animation: sway 8s ease-in-out infinite; }
+  .sway.b { animation-duration: 10s; animation-delay: -4s; }
+  @keyframes sway { 0%,100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+  @media (prefers-reduced-motion: reduce) { .sway { animation: none; } html { scroll-behavior: auto; } }
+
+  section { border-top: 1px solid var(--ink); padding: 20px 0 0; margin-top: 88px; display: grid; grid-template-columns: 1fr 2fr; gap: var(--g); }
+  h2 { font-family: 'Onest', sans-serif; font-weight: 500; font-size: 15px; margin: 4px 0 0; color: var(--gray); }
+  .weeks { margin: 0; padding: 0; list-style: none; }
+  .weeks li { display: grid; grid-template-columns: 22px 1fr 1fr; gap: 16px; align-items: baseline; padding: 0 0 18px; }
+  .weeks .d { width: 12px; height: 12px; border-radius: 50%; align-self: center; }
+  .weeks b { font-weight: 500; font-size: 22px; letter-spacing: -.01em; }
+  .weeks span { color: var(--gray); font-size: 16px; }
+  .note { font-size: 14px; color: var(--gray); margin: 8px 0 0; }
+  .body p { margin: 0 0 16px; max-width: 30em; }
+  dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 28px; }
+  dt { color: var(--gray); }
+  dd { margin: 0; }
+  .join { font-size: 22px; margin: 28px 0 0; }
+
+  footer { margin-top: 120px; padding: 20px 0 32px; font-size: 14px; color: var(--gray); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 800px) {
+    :root { --g: 20px; }
+    .hero { grid-template-columns: 1fr; gap: 24px; min-height: 0; padding-top: 16px; }
+    .art { max-width: 240px; }
+    section { grid-template-columns: 1fr; gap: 12px; margin-top: 64px; }
+    .weeks li { grid-template-columns: 20px 1fr; row-gap: 0; }
+    .weeks span { grid-column: 2; }
+    dl { grid-template-columns: 1fr; gap: 0; }
+    dd { margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <div>[ШКОЛА] · Creative Engineering</div>
+  <div class="links"><a href="mailto:">Email</a><a href="#">Telegram&nbsp;↗</a></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>Технологии как способ думать и создавать</h1>
+    <p>Онлайн-курс для подростков <span style="white-space:nowrap">14–19 лет</span>. Пять недель, пять тем и свой проект в конце.</p>
+  </div>
+  <div class="art" aria-hidden="true">
+    <svg viewBox="0 0 300 290" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="26" x2="270" y2="26" stroke="#1b1b1b" stroke-width="1.6"/>
+      <line x1="150" y1="26" x2="150" y2="6" stroke="#1b1b1b" stroke-width="1.2"/>
+      <g class="sway"><line x1="60" y1="26" x2="60" y2="130" stroke="#1b1b1b"/><circle cx="60" cy="146" r="16" fill="#e8452a"/></g>
+      <g class="sway b"><line x1="130" y1="26" x2="130" y2="210" stroke="#1b1b1b"/><circle cx="130" cy="236" r="26" fill="#fff" stroke="#1b1b1b" stroke-width="1.4"/></g>
+      <g class="sway"><line x1="200" y1="26" x2="200" y2="96" stroke="#1b1b1b"/><path d="M200 96 l-16 28 h32 z" fill="#2c4fb8"/></g>
+      <g class="sway b"><line x1="246" y1="26" x2="246" y2="170" stroke="#1b1b1b"/><circle cx="246" cy="184" r="14" fill="#f2b632"/></g>
+    </svg>
+  </div>
+</header>
+
+<section id="program">
+  <h2>Программа</h2>
+  <!-- Блоки 1–3 названы автором курса; 4 и 5 — предложение, не подтверждено -->
+  <div>
+    <ol class="weeks">
+      <li><i class="d" style="background:var(--yellow)"></i><b>Генеративная графика</b><span>код, который рисует</span></li>
+      <li><i class="d" style="background:var(--pink)"></i><b>Звук</b><span>звук как материал</span></li>
+      <li><i class="d" style="background:var(--blue)"></i><b>3D</b><span>объекты в трёх измерениях</span></li>
+      <li><i class="d" style="background:var(--red)"></i><b>Данные и датчики</b><span>измерения мира как материал</span></li>
+      <li><i class="d" style="background:var(--ink)"></i><b>Финальный проект</b><span>сборка и показ</span></li>
+    </ol>
+    <p class="note">Темы четвёртой и пятой недель уточняются.</p>
+  </div>
+</section>
+
+<section id="about">
+  <h2>О курсе</h2>
+  <div class="body">
+    <p>Курс о технологиях с гуманитарным углом: мы смотрим на них как инженеры, художники и критики. Каждую неделю новый инструмент и небольшая работа.</p>
+    <p>Итоговые проекты публикуются в нашей онлайн-галерее.</p>
+  </div>
+</section>
+
+<section id="details">
+  <h2>Детали</h2>
+  <div>
+    <dl>
+      <dt>Формат</dt><dd>онлайн, 5 недель</dd>
+      <dt>Возраст</dt><dd>14–19 лет, опыт программирования не нужен [уточнить]</dd>
+      <dt>Стоимость</dt><dd>50 000 ₸</dd>
+      <dt>Набор</dt><dd>[дата уточняется]</dd>
+    </dl>
+    <p class="join">Написать нам: <a href="mailto:">Email</a> или <a href="#">Telegram&nbsp;↗</a></p>
+  </div>
+</section>
+
+<footer>
+  <div>[ШКОЛА] · Creative Engineering School</div>
+  <div>Бюро Art + STEM</div>
+</footer>
+
+</div>
+</body>
+</html>
