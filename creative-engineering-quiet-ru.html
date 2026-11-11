@@ -30,7 +30,8 @@
   .trail .line { position: absolute; height: 2px; background: var(--red); transform-origin: 0 50%; pointer-events: none; }
   @media (hover: none), (pointer: coarse) { .cursor-dot, .trail { display: none; } }
   nav { display: flex; justify-content: space-between; gap: 16px; padding: var(--g) 0; font-size: 15px; }
-  nav .links { display: flex; gap: 22px; }
+  nav .links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 20px; }
+  nav .links a { white-space: nowrap; }
 
   .story { display: grid; grid-template-columns: .8fr 1.2fr; gap: 24px; align-items: start; }
   .story-text { padding-bottom: 26vh; }
@@ -95,7 +96,7 @@
 
 <nav>
   <div>[ШКОЛА] · Creative Engineering</div>
-  <div class="links"><a href="mailto:">Email</a><a href="#">Telegram&nbsp;↗</a></div>
+  <div class="links"><a href="creative-engineering-flow-ru.html">Версия: поток</a><a href="mailto:">Email</a><a href="#">Telegram&nbsp;↗</a></div>
 </nav>
 
 <div class="story">

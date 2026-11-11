@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Engineering — flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #04060b; --ink: #eaf2ff; --gray: #8f9bb0;
+    --red: #6ff0ff; --yellow: #f2b632; --pink: #ee95b4; --blue: #2c4fb8;
+    --g: 24px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--yellow); color: #04060b; }
+  a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+  svg { display: block; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 var(--g); }
+  .gray { color: var(--gray); }
+
+  .cursor-dot { position: fixed; left: 0; top: 0; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--red); pointer-events: none; z-index: 3000; opacity: 0; will-change: transform; }
+  .cursor-dot.on { opacity: 1; }
+  .trail { position: fixed; left: 0; top: 0; width: 0; height: 0; pointer-events: none; z-index: 2999; }
+  .trail .line { position: absolute; height: 2px; background: var(--red); transform-origin: 0 50%; pointer-events: none; }
+  @media (hover: none), (pointer: coarse) { .cursor-dot, .trail { display: none; } }
+  nav { display: flex; justify-content: space-between; gap: 16px; padding: var(--g) 0; font-size: 15px; }
+  nav .links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 20px; }
+  nav .links a { white-space: nowrap; }
+
+  .story { position: relative; z-index: 1; }
+  .story-text { max-width: 540px; }
+  #flow, #bloom { position: fixed; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  #bloom { filter: blur(18px) saturate(1.8); mix-blend-mode: screen; opacity: 1; }
+  nav, section, footer { position: relative; z-index: 1; }
+  h1 { color: #fff; text-shadow: calc(var(--ca, 1.2px) * -1) 0 rgba(255, 60, 100, .75), var(--ca, 1.2px) 0 rgba(60, 200, 255, .75); }
+  .story-text { padding-bottom: 26vh; }
+  .hero { min-height: 68vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0 48px; }
+  h1 { font-family: 'Unbounded', 'Onest', sans-serif; font-weight: 500; font-size: clamp(28px, 4.2vw, 56px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 28px; text-wrap: balance; }
+  h1 .w { display: inline-block; white-space: nowrap; }
+  h1 .ch { display: inline-block; will-change: transform; }
+  .hero p { margin: 0; max-width: 24em; font-size: 20px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  section { padding: 20px 0 0; margin-top: 88px; display: grid; grid-template-columns: 1fr 2fr; gap: var(--g); }
+  h2 { font-family: 'Onest', sans-serif; font-weight: 500; font-size: 15px; margin: 4px 0 0; color: var(--gray); }
+  .weeks { margin: 0; padding: 0; list-style: none; }
+  #program { display: block; margin-top: 2vh; padding-top: 0; }
+  #program h2 { margin: 0 0 4vh; }
+  .weeks li { display: grid; grid-template-columns: 22px 1fr; column-gap: 16px; align-items: baseline; padding: 0 0 18px; outline: none; }
+  .weeks li b, .weeks li span { grid-column: 2; }
+  .weeks .d { grid-row: 1; grid-column: 1; width: 12px; height: 12px; border-radius: 50%; align-self: center; transition: transform .35s; }
+  #program .weeks li { padding-bottom: 9vh; transition: opacity .35s; }
+  .has-active #program .weeks li:not(.on) { opacity: .38; }
+  #program .weeks li.on .d { transform: scale(1.7); }
+  #program .weeks li:focus-visible b { outline: 3px solid var(--blue); outline-offset: 4px; }
+  .weeks b { font-weight: 500; font-size: 22px; letter-spacing: -.01em; }
+  .weeks span { color: var(--gray); font-size: 16px; }
+  .note { font-size: 14px; color: var(--gray); margin: 8px 0 0; }
+  .body p { margin: 0 0 16px; max-width: 30em; }
+  .people { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .person img, .person .ph { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; display: block; margin: 0 0 16px; }
+  .person .ph { position: relative; background: var(--pink); overflow: hidden; }
+  .person .ph i { position: absolute; width: 56%; aspect-ratio: 1; border-radius: 50%; background: var(--yellow); right: -8%; top: -10%; }
+  .person .ph span { position: absolute; left: 14px; bottom: 12px; font-size: 14px; color: var(--ink); }
+  .person h3 { font-family: 'Onest', sans-serif; font-weight: 500; font-size: 24px; letter-spacing: -.01em; margin: 0 0 8px; }
+  .person p { margin: 0; font-size: 16px; line-height: 1.55; }
+  dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 28px; }
+  dt { color: var(--gray); }
+  dd { margin: 0; }
+  .join { font-size: 22px; margin: 28px 0 0; }
+
+  footer { margin-top: 120px; padding: 20px 0 32px; font-size: 14px; color: var(--gray); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 800px) {
+    :root { --g: 20px; }
+    .hero { min-height: 62vh; padding-top: 12vh; }
+    #bloom { opacity: .7; }
+    #flow { opacity: .85; }
+    #program .weeks li { padding-bottom: 7vh; }
+    section { grid-template-columns: 1fr; gap: 12px; margin-top: 64px; }
+    .people { grid-template-columns: 1fr; gap: 36px; }
+    dl { grid-template-columns: 1fr; gap: 0; }
+    dd { margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="flow" aria-hidden="true"></canvas>
+<canvas id="bloom" aria-hidden="true"></canvas>
+<div class="wrap">
+
+<nav>
+  <div>[ШКОЛА] · Creative Engineering</div>
+  <div class="links"><a href="creative-engineering-quiet-ru.html">Версия: мобиль</a><a href="mailto:">Email</a><a href="#">Telegram&nbsp;↗</a></div>
+</nav>
+
+<div class="story">
+  <div class="story-text">
+    <header class="hero">
+      <h1 id="title">Креативная инженерия</h1>
+      <p>Онлайн-курс для подростков <span style="white-space:nowrap">14–19 лет</span>. Пять недель, пять тем и свой проект в конце.</p>
+    </header>
+
+    <section id="program">
+      <h2>Программа</h2>
+      <!-- Блоки 1–3 названы автором курса; 4 и 5 — предложение, не подтверждено -->
+      <ol class="weeks">
+        <li tabindex="0"><i class="d" style="background:var(--yellow)"></i><b>Генеративная графика</b><span>код, который рисует</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--pink)"></i><b>Звук</b><span>звук как материал</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--blue)"></i><b>3D</b><span>объекты в трёх измерениях</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--red)"></i><b>Данные и датчики</b><span>измерения мира как материал</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--ink)"></i><b>Финальный проект</b><span>сборка и показ</span></li>
+      </ol>
+      <p class="note">Темы четвёртой и пятой недель уточняются.</p>
+    </section>
+  </div>
+
+</div>
+
+<section id="about">
+  <h2>О курсе</h2>
+  <div class="body">
+    <p>Курс о технологиях с гуманитарным углом: мы смотрим на них как инженеры, художники и критики. Каждую неделю новый инструмент и небольшая работа.</p>
+    <p>Итоговые проекты публикуются в нашей онлайн-галерее.</p>
+  </div>
+</section>
+
+<section id="parents">
+  <h2>Родителям</h2>
+  <ul class="weeks">
+    <li><i class="d" style="background:var(--yellow)"></i><b>Инженерное мышление</b></li>
+    <li><i class="d" style="background:var(--pink)"></i><b>Дизайн-мышление</b></li>
+    <li><i class="d" style="background:var(--blue)"></i><b>Воображение</b></li>
+    <li><i class="d" style="background:var(--red)"></i><b>Навыки программирования</b></li>
+    <li><i class="d" style="background:var(--ink)"></i><b>Проект в портфолио для поступления в топовые университеты</b></li>
+  </ul>
+</section>
+
+<section id="team">
+  <h2>Ведущие</h2>
+  <div class="people">
+    <article class="person">
+      <img src="img/timofey-nosov.jpg" alt="Тимофей Носов" width="900" height="900">
+      <h3>Тимофей Носов</h3>
+      <p>Инженер, исследователь и преподаватель. Несколько лет руководил командами аналитиков данных в Yandex и работал над Яндекс Картами, а сегодня делает образовательные программы на стыке технологий и искусства. Учился в Simon Fraser University.</p>
+    </article>
+    <article class="person">
+      <div class="ph" role="img" aria-label="Фото Iris Kazhmurat будет добавлено"><i></i><span>[фото]</span></div>
+      <h3>Iris Kazhmurat</h3>
+      <p>Родом из Алматы, окончила бакалавриат по изобразительному искусству (BFA); дополнительно изучала бизнес и историю искусства. Любимый материал — акрил. Вдохновляется Кандинским, Ротко и Моне.</p>
+    </article>
+  </div>
+</section>
+
+<section id="details">
+  <h2>Детали</h2>
+  <div>
+    <dl>
+      <dt>Формат</dt><dd>онлайн, 5 недель</dd>
+      <dt>Возраст</dt><dd>14–19 лет, опыт программирования не нужен [уточнить]</dd>
+      <dt>Стоимость</dt><dd>50 000 ₸</dd>
+      <dt>Набор</dt><dd>[дата уточняется]</dd>
+    </dl>
+    <p class="join">Написать нам: <a href="mailto:">Email</a> или <a href="#">Telegram&nbsp;↗</a></p>
+  </div>
+</section>
+
+<footer>
+  <div>[ШКОЛА] · Creative Engineering School</div>
+  <div>Бюро Art + STEM</div>
+</footer>
+
+</div>
+<script>
+(function () {
+  var cv = document.getElementById('flow'), bl = document.getElementById('bloom');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d'), bctx = bl.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var small = window.matchMedia('(max-width: 800px)').matches;
+  var N = small ? 1000 : 2600;
+  var dpr = Math.min(window.devicePixelRatio || 1, small ? 1 : 1.5);
+  var W = 0, H = 0, S = 1, baseCX = 0, baseCY = 0, CX = 0, CY = 0;
+  var X = new Float32Array(N), Y = new Float32Array(N), PX = new Float32Array(N), PY = new Float32Array(N);
+  var VX = new Float32Array(N), VY = new Float32Array(N), L = new Float32Array(N);
+  var SP = new Float32Array(N), U = new Float32Array(N), K = new Uint8Array(N);
+  var TAU = 6.2832;
+
+  /* ---- curl-like flow field from a sum of travelling waves ---- */
+  var waves = [[1, .3, .40, 0, 1], [-.4, 1, .33, 1.7, .9], [.8, .9, .50, 3.1, .7], [-1, .6, .27, 4.4, .8], [.3, -1.2, .60, 2.2, .6]];
+  var ns = 2.4;     // spatial scale (1/S units)
+  function flow(x, y, t, out) {
+    var fx = 0, fy = 0, f = ns / S;
+    for (var i = 0; i < waves.length; i++) {
+      var w = waves[i], c = Math.cos((w[0] * x + w[1] * y) * f + w[2] * t + w[3]) * w[4];
+      fx += c * w[1]; fy -= c * w[0];
+    }
+    out[0] = fx; out[1] = fy;
+  }
+
+  /* ---- modes: free flow + four shaped states tied to the five weeks ---- */
+  var mode = 0, m = 0, mT = 0;
+  var presets = [
+    { spd: 1.0, sw: 0.9 },   // 0 generative graphics: free strands
+    { spd: 0.8, sw: 0.4 },   // 1 sound: standing rings
+    { spd: 0.9, sw: 0.3 },   // 2 3D: rotating torus
+    { spd: 1.0, sw: 0.2 },   // 3 data: scrolling grid
+    { spd: 1.1, sw: 0.7 }    // 4 final: lissajous knot
+  ];
+  var P = { spd: 1.0, sw: 0.9 };
+  function target(i, t, out) {
+    var u = U[i], k = K[i];
+    if (mode === 1) {
+      var kk = k % 8, R = (kk + 1.2) * S * 0.13 * (1 + 0.05 * Math.sin(t * 2.3 + kk * 1.7)), th = u * TAU + t * (kk % 2 ? 0.25 : -0.2);
+      out[0] = CX + R * Math.cos(th); out[1] = CY + R * Math.sin(th);
+    } else if (mode === 2) {
+      var v = ((i * 0.61803) % 1) * TAU, R0 = S * 0.62, r = S * 0.26;
+      var x3 = (R0 + r * Math.cos(v)) * Math.cos(u * TAU), y3 = (R0 + r * Math.cos(v)) * Math.sin(u * TAU), z3 = r * Math.sin(v);
+      var ax = t * 0.35 + rotX, ay = t * 0.5 + rotY;
+      var y2 = y3 * Math.cos(ax) - z3 * Math.sin(ax), z2 = y3 * Math.sin(ax) + z3 * Math.cos(ax);
+      var x2 = x3 * Math.cos(ay) + z2 * Math.sin(ay);
+      out[0] = CX + x2; out[1] = CY + y2;
+    } else if (mode === 3) {
+      var sp = S * 0.075, col = i % 36, row = ((i / 36) | 0) % 22;
+      var gy = ((row * sp + t * S * 0.05) % (22 * sp)) - 11 * sp;
+      out[0] = CX + (col - 17.5) * sp; out[1] = CY + gy * 0.9;
+    } else if (mode === 4) {
+      var s = u * TAU;
+      out[0] = CX + S * 0.95 * Math.sin(3 * s + t * 0.3);
+      out[1] = CY + S * 0.7 * Math.sin(2 * s + t * 0.2) + S * 0.2 * Math.sin(5 * s);
+    } else { out[0] = CX; out[1] = CY; }
+  }
+
+  /* ---- sizing and particles ---- */
+  function size() {
+    W = cv.width = Math.round(window.innerWidth * dpr);
+    H = cv.height = Math.round(window.innerHeight * dpr);
+    bl.width = Math.max(2, Math.round(W / 4)); bl.height = Math.max(2, Math.round(H / 4));
+    S = Math.min(W, H) * (small ? 0.36 : 0.4);
+    baseCX = W * (small ? 0.5 : 0.68); baseCY = H * (small ? 0.3 : 0.5);
+    CX = baseCX; CY = baseCY;
+    ctx.fillStyle = '#04060b'; ctx.fillRect(0, 0, W, H);
+  }
+  function gauss() { return (Math.random() + Math.random() + Math.random() - 1.5) / 1.5; }
+  function spawn(i) {
+    var a = Math.random() * TAU, r = Math.abs(gauss()) * S * 0.38;
+    X[i] = PX[i] = CX + Math.cos(a) * r; Y[i] = PY[i] = CY + Math.sin(a) * r;
+    VX[i] = VY[i] = 0; L[i] = 120 + Math.random() * 380;
+  }
+  for (var i = 0; i < N; i++) { SP[i] = 0.6 + Math.random() * 0.8; U[i] = Math.random(); K[i] = (Math.random() * 255) | 0; }
+  size();
+  for (i = 0; i < N; i++) spawn(i);
+  window.addEventListener('resize', function () { size(); for (var i = 0; i < N; i++) spawn(i); });
+
+  /* ---- input ---- */
+  var ptrX = -9999, ptrY = -9999, lpx = 0, lpy = 0, pvx = 0, pvy = 0, rotX = 0, rotY = 0, rX = 0, rY = 0;
+  var sv = 0, lastScroll = window.scrollY, burst = null;
+  window.addEventListener('pointermove', function (e) {
+    var x = e.clientX * dpr, y = e.clientY * dpr;
+    if (ptrX > -9000) { pvx = x - lpx; pvy = y - lpy; }
+    ptrX = lpx = x; ptrY = lpy = y;
+    rX = (y / H - 0.5) * 1.3; rY = (x / W - 0.5) * 1.3;
+  }, { passive: true });
+  document.documentElement.addEventListener('mouseleave', function () { ptrX = ptrY = -9999; });
+  window.addEventListener('pointerdown', function (e) { burst = { x: e.clientX * dpr, y: e.clientY * dpr, t: 1 }; });
+  window.addEventListener('scroll', function () {
+    var d = Math.abs(window.scrollY - lastScroll); lastScroll = window.scrollY; sv = Math.min(60, sv + d * 0.5);
+    fromScroll();
+  }, { passive: true });
+
+  /* ---- text <-> state link: weeks switch the form of the flow ---- */
+  var rows = [].slice.call(document.querySelectorAll('#program .weeks li'));
+  var hov = null, scr = null, cur = null, h1 = document.getElementById('title');
+  function apply() {
+    var a = hov != null ? hov : scr;
+    if (a === cur) return;
+    cur = a;
+    document.body.classList.toggle('has-active', a != null);
+    rows.forEach(function (li, i) { li.classList.toggle('on', i === a); });
+    var md = a == null ? 0 : a;
+    if (md !== mode) { mode = md; mT = mode === 0 ? 0 : 0.85; }
+    var p = presets[md]; P.spdT = p.spd; P.swT = p.sw;
+    if (reduce) settle(150);
+  }
+  function fromScroll() {
+    if (!rows.length) return;
+    var vh = window.innerHeight, best = null, bd = 1e9;
+    rows.forEach(function (li, i) { var r = li.getBoundingClientRect(), d = Math.abs(r.top + 40 - vh * 0.45); if (d < bd) { bd = d; best = i; } });
+    var f = rows[0].getBoundingClientRect(), l = rows[rows.length - 1].getBoundingClientRect();
+    scr = (f.top < vh * 0.62 && l.bottom > vh * 0.3) ? best : null;
+    apply();
+  }
+  rows.forEach(function (li, i) {
+    ['mouseenter', 'focus'].forEach(function (ev) { li.addEventListener(ev, function () { hov = i; apply(); }); });
+    ['mouseleave', 'blur'].forEach(function (ev) { li.addEventListener(ev, function () { hov = null; apply(); }); });
+  });
+  window.addEventListener('resize', fromScroll);
+  P.spdT = P.spd; P.swT = P.sw;
+
+  /* ---- simulation + drawing ---- */
+  var fl = [0, 0], tg = [0, 0], tt = 0, smooth = 0;
+  var OFFS = [[1, 'rgba(255,40,80,'], [0, 'rgba(30,240,235,'], [-1, 'rgba(60,90,255,']];
+  function stepAll(k, t) {
+    // ease global params
+    var e = 1 - Math.pow(0.96, k);
+    P.spd += (P.spdT - P.spd) * e; P.sw += (P.swT - P.sw) * e; m += (mT - m) * (1 - Math.pow(0.97, k));
+    rotX += (rX - rotX) * e; rotY += (rY - rotY) * e;
+    var px = ptrX > -9000 ? ptrX : baseCX, py = ptrX > -9000 ? ptrY : baseCY;
+    CX += (baseCX + (px - baseCX) * 0.06 - CX) * e; CY += (baseCY + (py - baseCY) * 0.06 - CY) * e;
+    var boost = 1 + Math.min(2, sv * 0.04), RP = 240 * dpr, speed = 0.95 * dpr * P.spd * boost;
+    for (var i = 0; i < N; i++) {
+      PX[i] = X[i]; PY[i] = Y[i];
+      var x = X[i], y = Y[i], dx = x - CX, dy = y - CY, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      flow(x, y, t, fl);
+      var dvx = fl[0] * speed * SP[i] * 1.1, dvy = fl[1] * speed * SP[i] * 1.1;
+      // swirl around the core and soft containment
+      var sw = P.sw * speed * 0.9 * Math.min(1, d / (S * 0.35));
+      dvx += -dy / d * sw; dvy += dx / d * sw;
+      if (d > S * 0.62) { var c = (d - S * 0.62) / S * speed * 3.2; dvx -= dx / d * c; dvy -= dy / d * c; }
+      // pointer swirl
+      var qx = x - ptrX, qy = y - ptrY, qd = Math.sqrt(qx * qx + qy * qy);
+      if (qd < RP) {
+        var f = (1 - qd / RP); f *= f;
+        dvx += (-qy / (qd || 1)) * f * 5 * dpr + pvx * f * 0.35; dvy += (qx / (qd || 1)) * f * 5 * dpr + pvy * f * 0.35;
+        dvx -= qx / (qd || 1) * f * 0.8 * dpr; dvy -= qy / (qd || 1) * f * 0.8 * dpr;
+      }
+      if (m > 0.01) {
+        target(i, t, tg);
+        var tx = (tg[0] - x) * 0.07, ty = (tg[1] - y) * 0.07;
+        dvx = dvx * (1 - m) + tx * m; dvy = dvy * (1 - m) + ty * m;
+      }
+      if (burst && burst.t > 0.5) {
+        var bx = x - burst.x, by = y - burst.y, bd2 = Math.sqrt(bx * bx + by * by);
+        if (bd2 < 320 * dpr) { var bf = (1 - bd2 / (320 * dpr)); VX[i] += bx / (bd2 || 1) * bf * 22 * dpr; VY[i] += by / (bd2 || 1) * bf * 22 * dpr; }
+      }
+      VX[i] += (dvx - VX[i]) * 0.12 * k; VY[i] += (dvy - VY[i]) * 0.12 * k;
+      X[i] += VX[i] * k; Y[i] += VY[i] * k;
+      L[i] -= k;
+      if (L[i] <= 0 || X[i] < -50 || X[i] > W + 50 || Y[i] < -50 || Y[i] > H + 50) spawn(i);
+    }
+    if (burst) { burst.t -= 0.5; if (burst.t <= 0) burst = null; }
+    pvx *= 0.8; pvy *= 0.8; sv *= Math.pow(0.94, k);
+  }
+  function draw() {
+    var ca = (8 + Math.min(14, sv * 0.2)) * dpr;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(4,6,11,0.07)'; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.lineWidth = 0.9 * dpr; ctx.lineCap = 'round';
+    for (var c = 0; c < 3; c++) {
+      var sh = OFFS[c][0], a = c === 1 ? 0.5 : c === 2 ? 0.6 : 0.2;
+      ctx.strokeStyle = OFFS[c][1] + a + ')';
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) {
+        var o = sh * ca * ((X[i] - CX) / S) + sh * 1.2 * dpr;
+        var oy = sh * ca * ((Y[i] - CY) / S);
+        ctx.moveTo(PX[i] + o, PY[i] + oy); ctx.lineTo(X[i] + o, Y[i] + oy);
+      }
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    bctx.drawImage(cv, 0, 0, bl.width, bl.height);
+    if (h1) h1.style.setProperty('--ca', (1.2 + Math.min(7, sv * 0.12) + Math.min(3, Math.abs(pvx) * 0.05)).toFixed(2) + 'px');
+  }
+  function settle(n) { for (var s = 0; s < n; s++) stepAll(1, tt += 0.016); draw(); }
+
+  fromScroll();
+  if (reduce) { settle(260); return; }
+  var raf = 0, last = 0;
+  function frame(ts) {
+    raf = requestAnimationFrame(frame);
+    var dt = Math.min(0.05, last ? (ts - last) / 1000 : 0.016); last = ts;
+    var k = dt * 60; tt += dt;
+    stepAll(k, tt); draw();
+  }
+  function run(on) { if (on && !raf) { last = 0; raf = requestAnimationFrame(frame); } else if (!on && raf) { cancelAnimationFrame(raf); raf = 0; } }
+  document.addEventListener('visibilitychange', function () { run(!document.hidden); });
+  run(true);
+})();
+</script>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<script>
+  (function () {
+    var dot = document.querySelector('.cursor-dot');
+    if (!dot || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(trail);
+    var prev = null;
+
+    window.addEventListener('mousemove', function (e) {
+      var p = { x: e.clientX, y: e.clientY };
+      dot.style.transform = 'translate3d(' + p.x + 'px,' + p.y + 'px,0)';
+      dot.classList.add('on');
+      if (prev && !calm) trail.appendChild(segment(prev, p));
+      prev = p;
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', function () {
+      dot.classList.remove('on');
+      prev = null;
+    });
+
+    // one straight segment between two pointer positions
+    function segment(a, b) {
+      var el = document.createElement('div');
+      var dx = b.x - a.x, dy = b.y - a.y;
+      el.className = 'line';
+      el.style.width = Math.sqrt(dx * dx + dy * dy) + 'px';
+      el.style.left = a.x + 'px';
+      el.style.top = a.y + 'px';
+      el.style.transform = 'rotate(' + Math.atan2(dy, dx) * 180 / Math.PI + 'deg)';
+      return el;
+    }
+
+    // every 450 ms the trail is wiped, oldest segment first, 10 ms apart
+    setInterval(function () {
+      Array.prototype.slice.call(trail.children).forEach(function (el, i) {
+        setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, i * 10);
+      });
+    }, 450);
+  })();
+</script>
+</body>
+</html>
