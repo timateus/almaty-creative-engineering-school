@@ -112,7 +112,7 @@
       <!-- Блоки 1–3 названы автором курса; 4 и 5 — предложение, не подтверждено -->
       <ol class="weeks">
         <li tabindex="0"><i class="d" style="background:var(--yellow)"></i><b>Генеративная графика</b><span>код, который рисует</span></li>
-        <li tabindex="0"><i class="d" style="background:var(--pink)"></i><b>Звук</b><span>звук как материал</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--pink)"></i><b>Математика как искусство</b><span>формулы, симметрия, узоры</span></li>
         <li tabindex="0"><i class="d" style="background:var(--blue)"></i><b>3D</b><span>объекты в трёх измерениях</span></li>
         <li tabindex="0"><i class="d" style="background:var(--red)"></i><b>Данные и датчики</b><span>измерения мира как материал</span></li>
         <li tabindex="0"><i class="d" style="background:var(--ink)"></i><b>Финальный проект</b><span>сборка и показ</span></li>
@@ -208,7 +208,7 @@
   var mode = 0, m = 0, mT = 0;
   var presets = [
     { spd: 1.0, sw: 0.9 },   // 0 generative graphics: free strands
-    { spd: 0.8, sw: 0.4 },   // 1 sound: standing rings
+    { spd: 0.8, sw: 0.4 },   // 1 math as art: spirograph curves
     { spd: 0.9, sw: 0.3 },   // 2 3D: rotating torus
     { spd: 1.0, sw: 0.2 },   // 3 data: scrolling grid
     { spd: 1.1, sw: 0.7 }    // 4 final: lissajous knot
@@ -217,8 +217,9 @@
   function target(i, t, out) {
     var u = U[i], k = K[i];
     if (mode === 1) {
-      var kk = k % 8, R = (kk + 1.2) * S * 0.13 * (1 + 0.05 * Math.sin(t * 2.3 + kk * 1.7)), th = u * TAU + t * (kk % 2 ? 0.25 : -0.2);
-      out[0] = CX + R * Math.cos(th); out[1] = CY + R * Math.sin(th);
+      var tau = u * TAU * 3, dd = 5 + 1.6 * Math.sin(t * 0.4), sc = S * 0.13 * (0.5 + 0.25 * (k % 3)), rt = t * 0.15;
+      var xx = 2 * Math.cos(tau) + dd * Math.cos(2 * tau / 3), yy = 2 * Math.sin(tau) - dd * Math.sin(2 * tau / 3);
+      out[0] = CX + sc * (xx * Math.cos(rt) - yy * Math.sin(rt)); out[1] = CY + sc * (xx * Math.sin(rt) + yy * Math.cos(rt));
     } else if (mode === 2) {
       var v = ((i * 0.61803) % 1) * TAU, R0 = S * 0.62, r = S * 0.26;
       var x3 = (R0 + r * Math.cos(v)) * Math.cos(u * TAU), y3 = (R0 + r * Math.cos(v)) * Math.sin(u * TAU), z3 = r * Math.sin(v);
