@@ -9,14 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #04060b; --ink: #eaf2ff; --gray: #8f9bb0;
-    --red: #6ff0ff; --yellow: #f2b632; --pink: #ee95b4; --blue: #2c4fb8;
+    --paper: #f4f5f3; --ink: #1b1b1b; --gray: #67645c;
+    --red: #e8452a; --yellow: #f2b632; --pink: #ee95b4; --blue: #2c4fb8;
     --g: 24px;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
-  ::selection { background: var(--yellow); color: #04060b; }
+  ::selection { background: var(--yellow); }
   a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; }
   a:hover { text-decoration-thickness: 2px; }
   a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
@@ -36,9 +36,9 @@
   .story { position: relative; z-index: 1; }
   .story-text { max-width: 540px; }
   #flow, #bloom { position: fixed; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-  #bloom { filter: blur(18px) saturate(1.8); mix-blend-mode: screen; opacity: 1; }
+  #bloom { filter: blur(10px) saturate(1.4); mix-blend-mode: multiply; opacity: .45; }
   nav, section, footer { position: relative; z-index: 1; }
-  h1 { color: #fff; text-shadow: calc(var(--ca, 1.2px) * -1) 0 rgba(255, 60, 100, .75), var(--ca, 1.2px) 0 rgba(60, 200, 255, .75); }
+  h1 { color: var(--ink); text-shadow: calc(var(--ca, 1.2px) * -1) 0 rgba(255, 40, 110, .55), var(--ca, 1.2px) 0 rgba(0, 170, 255, .55); }
   .story-text { padding-bottom: 26vh; }
   .hero { min-height: 68vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0 48px; }
   h1 { font-family: 'Unbounded', 'Onest', sans-serif; font-weight: 500; font-size: clamp(28px, 4.2vw, 56px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 28px; text-wrap: balance; }
@@ -245,7 +245,7 @@
     S = Math.min(W, H) * (small ? 0.36 : 0.4);
     baseCX = W * (small ? 0.5 : 0.68); baseCY = H * (small ? 0.3 : 0.5);
     CX = baseCX; CY = baseCY;
-    ctx.fillStyle = '#04060b'; ctx.fillRect(0, 0, W, H);
+    ctx.clearRect(0, 0, W, H);
   }
   function gauss() { return (Math.random() + Math.random() + Math.random() - 1.5) / 1.5; }
   function spawn(i) {
@@ -305,7 +305,7 @@
 
   /* ---- simulation + drawing ---- */
   var fl = [0, 0], tg = [0, 0], tt = 0, smooth = 0;
-  var OFFS = [[1, 'rgba(255,40,80,'], [0, 'rgba(30,240,235,'], [-1, 'rgba(60,90,255,']];
+  var OFFS = [[1, 'rgba(255,30,120,'], [0, 'rgba(0,175,255,'], [-1, 'rgba(70,40,230,']];
   function stepAll(k, t) {
     // ease global params
     var e = 1 - Math.pow(0.96, k);
@@ -349,12 +349,12 @@
   }
   function draw() {
     var ca = (8 + Math.min(14, sv * 0.2)) * dpr;
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = 'rgba(4,6,11,0.07)'; ctx.fillRect(0, 0, W, H);
-    ctx.globalCompositeOperation = 'lighter';
-    ctx.lineWidth = 0.9 * dpr; ctx.lineCap = 'round';
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,0.055)'; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.lineWidth = 0.8 * dpr; ctx.lineCap = 'round';
     for (var c = 0; c < 3; c++) {
-      var sh = OFFS[c][0], a = c === 1 ? 0.5 : c === 2 ? 0.6 : 0.2;
+      var sh = OFFS[c][0], a = c === 1 ? 0.42 : c === 2 ? 0.4 : 0.4;
       ctx.strokeStyle = OFFS[c][1] + a + ')';
       ctx.beginPath();
       for (var i = 0; i < N; i++) {
@@ -365,7 +365,7 @@
       ctx.stroke();
     }
     ctx.globalCompositeOperation = 'source-over';
-    bctx.drawImage(cv, 0, 0, bl.width, bl.height);
+    bctx.clearRect(0, 0, bl.width, bl.height); bctx.drawImage(cv, 0, 0, bl.width, bl.height);
     if (h1) h1.style.setProperty('--ca', (1.2 + Math.min(7, sv * 0.12) + Math.min(3, Math.abs(pvx) * 0.05)).toFixed(2) + 'px');
   }
   function settle(n) { for (var s = 0; s < n; s++) stepAll(1, tt += 0.016); draw(); }
