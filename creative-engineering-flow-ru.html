@@ -109,15 +109,15 @@
 
     <section id="program">
       <h2>Программа</h2>
-      <!-- Блоки 1–3 названы автором курса; 4 и 5 — предложение, не подтверждено -->
+      <!-- Блоки 1–3 названы автором курса; 5 — предложение, не подтверждено -->
       <ol class="weeks">
         <li tabindex="0"><i class="d" style="background:var(--yellow)"></i><b>Генеративная графика</b><span>код, который рисует</span></li>
         <li tabindex="0"><i class="d" style="background:var(--pink)"></i><b>Математика как искусство</b><span>формулы, симметрия, узоры</span></li>
         <li tabindex="0"><i class="d" style="background:var(--blue)"></i><b>3D</b><span>объекты в трёх измерениях</span></li>
-        <li tabindex="0"><i class="d" style="background:var(--red)"></i><b>Данные и датчики</b><span>измерения мира как материал</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--red)"></i><b>Экология через AI</b><span>AI как способ увидеть природу</span></li>
         <li tabindex="0"><i class="d" style="background:var(--ink)"></i><b>Финальный проект</b><span>сборка и показ</span></li>
       </ol>
-      <p class="note">Темы четвёртой и пятой недель уточняются.</p>
+      <p class="note">Тема пятой недели уточняется.</p>
     </section>
   </div>
 
@@ -210,7 +210,7 @@
     { spd: 1.0, sw: 0.9 },   // 0 generative graphics: free strands
     { spd: 0.8, sw: 0.4 },   // 1 math as art: spirograph curves
     { spd: 0.9, sw: 0.3 },   // 2 3D: rotating torus
-    { spd: 1.0, sw: 0.2 },   // 3 data: scrolling grid
+    { spd: 1.0, sw: 0.2 },   // 3 ecology: terrain contours
     { spd: 1.1, sw: 0.7 }    // 4 final: lissajous knot
   ];
   var P = { spd: 1.0, sw: 0.9 };
@@ -228,9 +228,9 @@
       var x2 = x3 * Math.cos(ay) + z2 * Math.sin(ay);
       out[0] = CX + x2; out[1] = CY + y2;
     } else if (mode === 3) {
-      var sp = S * 0.075, col = i % 36, row = ((i / 36) | 0) % 22;
-      var gy = ((row * sp + t * S * 0.05) % (22 * sp)) - 11 * sp;
-      out[0] = CX + (col - 17.5) * sp; out[1] = CY + gy * 0.9;
+      var row = k % 16, gx = (u - 0.5) * S * 2.0;
+      var gy = (row - 7.5) * S * 0.12 + S * 0.10 * Math.sin(u * TAU * 2 + t * 0.5 + row * 0.35) + S * 0.05 * Math.sin(u * TAU * 5 - t * 0.8 + row * 0.9);
+      out[0] = CX + gx; out[1] = CY + gy;
     } else if (mode === 4) {
       var s = u * TAU;
       out[0] = CX + S * 0.95 * Math.sin(3 * s + t * 0.3);
@@ -249,9 +249,15 @@
     ctx.clearRect(0, 0, W, H);
   }
   function gauss() { return (Math.random() + Math.random() + Math.random() - 1.5) / 1.5; }
+  var sp2 = [0, 0];
   function spawn(i) {
-    var a = Math.random() * TAU, r = Math.abs(gauss()) * S * 0.38;
-    X[i] = PX[i] = CX + Math.cos(a) * r; Y[i] = PY[i] = CY + Math.sin(a) * r;
+    if (mode !== 0 && m > 0.4) {          // shaped state: reappear on the form, not in a burst from the core
+      target(i, tt, sp2);
+      X[i] = PX[i] = sp2[0] + gauss() * 6 * dpr; Y[i] = PY[i] = sp2[1] + gauss() * 6 * dpr;
+    } else {
+      var a = Math.random() * TAU, r = Math.abs(gauss()) * S * 0.38;
+      X[i] = PX[i] = CX + Math.cos(a) * r; Y[i] = PY[i] = CY + Math.sin(a) * r;
+    }
     VX[i] = VY[i] = 0; L[i] = 120 + Math.random() * 380;
   }
   for (var i = 0; i < N; i++) { SP[i] = 0.6 + Math.random() * 0.8; U[i] = Math.random(); K[i] = (Math.random() * 255) | 0; }
@@ -349,6 +355,7 @@
     pvx *= 0.8; pvy *= 0.8; sv *= Math.pow(0.94, k);
   }
   function draw() {
+    if (!W || !H || !bl.width || !bl.height) return;
     var ca = (8 + Math.min(14, sv * 0.2)) * dpr;
     ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = 'rgba(0,0,0,0.055)'; ctx.fillRect(0, 0, W, H);
