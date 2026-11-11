@@ -32,20 +32,32 @@
   nav { display: flex; justify-content: space-between; gap: 16px; padding: var(--g) 0; font-size: 15px; }
   nav .links { display: flex; gap: 22px; }
 
-  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; min-height: 74vh; padding: 40px 0 64px; }
+  .story { display: grid; grid-template-columns: .8fr 1.2fr; gap: 24px; align-items: start; }
+  .story-text { padding-bottom: 26vh; }
+  .story-art { position: sticky; top: 3vh; height: 94vh; display: flex; align-items: center; }
+  .story-art svg { width: calc(100% + 48px); margin-right: -48px; height: auto; max-height: 100%; overflow: visible; touch-action: pan-y; }
+  .hero { min-height: 68vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0 48px; }
   h1 { font-family: 'Unbounded', 'Onest', sans-serif; font-weight: 500; font-size: clamp(28px, 4.2vw, 56px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 28px; text-wrap: balance; }
+  h1 .w { display: inline-block; white-space: nowrap; }
+  h1 .ch { display: inline-block; will-change: transform; }
   .hero p { margin: 0; max-width: 24em; font-size: 20px; }
-  .art svg { width: 100%; height: auto; max-height: 70vh; }
-  .sway { transform-box: fill-box; transform-origin: 50% 0%; animation: sway 8s ease-in-out infinite; }
-  .sway.b { animation-duration: 10s; animation-delay: -4s; }
-  @keyframes sway { 0%,100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
-  @media (prefers-reduced-motion: reduce) { .sway { animation: none; } html { scroll-behavior: auto; } }
+  .pc { transition: opacity .35s; }
+  .pc.dim { opacity: .3; }
+  .pc.hit { cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   section { padding: 20px 0 0; margin-top: 88px; display: grid; grid-template-columns: 1fr 2fr; gap: var(--g); }
   h2 { font-family: 'Onest', sans-serif; font-weight: 500; font-size: 15px; margin: 4px 0 0; color: var(--gray); }
   .weeks { margin: 0; padding: 0; list-style: none; }
-  .weeks li { display: grid; grid-template-columns: 22px 1fr 1fr; gap: 16px; align-items: baseline; padding: 0 0 18px; }
-  .weeks .d { width: 12px; height: 12px; border-radius: 50%; align-self: center; }
+  #program { display: block; margin-top: 2vh; padding-top: 0; }
+  #program h2 { margin: 0 0 4vh; }
+  .weeks li { display: grid; grid-template-columns: 22px 1fr; column-gap: 16px; align-items: baseline; padding: 0 0 18px; outline: none; }
+  .weeks li b, .weeks li span { grid-column: 2; }
+  .weeks .d { grid-row: 1; grid-column: 1; width: 12px; height: 12px; border-radius: 50%; align-self: center; transition: transform .35s; }
+  #program .weeks li { padding-bottom: 9vh; transition: opacity .35s; }
+  .has-active #program .weeks li:not(.on) { opacity: .38; }
+  #program .weeks li.on .d { transform: scale(1.7); }
+  #program .weeks li:focus-visible b { outline: 3px solid var(--blue); outline-offset: 4px; }
   .weeks b { font-weight: 500; font-size: 22px; letter-spacing: -.01em; }
   .weeks span { color: var(--gray); font-size: 16px; }
   .note { font-size: 14px; color: var(--gray); margin: 8px 0 0; }
@@ -66,11 +78,12 @@
 
   @media (max-width: 800px) {
     :root { --g: 20px; }
-    .hero { grid-template-columns: 1fr; gap: 24px; min-height: 0; padding-top: 16px; }
-    .art { max-width: 240px; }
+    .story { grid-template-columns: 1fr; gap: 0; }
+    .story-art { position: sticky; top: 0; order: -1; height: 36vh; z-index: 4; background: var(--paper); margin: 0 calc(-1 * var(--g)); padding: 0 var(--g); }
+    .story-art svg { width: 100%; margin-right: 0; }
+    .hero { min-height: 34vh; padding-top: 12px; }
+    #program .weeks li { padding-bottom: 7vh; }
     section { grid-template-columns: 1fr; gap: 12px; margin-top: 64px; }
-    .weeks li { grid-template-columns: 20px 1fr; row-gap: 0; }
-    .weeks span { grid-column: 2; }
     .people { grid-template-columns: 1fr; gap: 36px; }
     dl { grid-template-columns: 1fr; gap: 0; }
     dd { margin-bottom: 10px; }
@@ -85,37 +98,31 @@
   <div class="links"><a href="mailto:">Email</a><a href="#">Telegram&nbsp;↗</a></div>
 </nav>
 
-<header class="hero">
-  <div>
-    <h1>Креативная инженерия</h1>
-    <p>Онлайн-курс для подростков <span style="white-space:nowrap">14–19 лет</span>. Пять недель, пять тем и свой проект в конце.</p>
-  </div>
-  <div class="art" aria-hidden="true">
-    <svg viewBox="0 0 300 290" xmlns="http://www.w3.org/2000/svg">
-      <line x1="30" y1="26" x2="270" y2="26" stroke="#1b1b1b" stroke-width="1.6"/>
-      <line x1="150" y1="26" x2="150" y2="6" stroke="#1b1b1b" stroke-width="1.2"/>
-      <g class="sway"><line x1="60" y1="26" x2="60" y2="130" stroke="#1b1b1b"/><circle cx="60" cy="146" r="16" fill="#e8452a"/></g>
-      <g class="sway b"><line x1="130" y1="26" x2="130" y2="210" stroke="#1b1b1b"/><circle cx="130" cy="236" r="26" fill="#fff" stroke="#1b1b1b" stroke-width="1.4"/></g>
-      <g class="sway"><line x1="200" y1="26" x2="200" y2="96" stroke="#1b1b1b"/><path d="M200 96 l-16 28 h32 z" fill="#2c4fb8"/></g>
-      <g class="sway b"><line x1="246" y1="26" x2="246" y2="170" stroke="#1b1b1b"/><circle cx="246" cy="184" r="14" fill="#f2b632"/></g>
-    </svg>
-  </div>
-</header>
+<div class="story">
+  <div class="story-text">
+    <header class="hero">
+      <h1 id="title">Креативная инженерия</h1>
+      <p>Онлайн-курс для подростков <span style="white-space:nowrap">14–19 лет</span>. Пять недель, пять тем и свой проект в конце.</p>
+    </header>
 
-<section id="program">
-  <h2>Программа</h2>
-  <!-- Блоки 1–3 названы автором курса; 4 и 5 — предложение, не подтверждено -->
-  <div>
-    <ol class="weeks">
-      <li><i class="d" style="background:var(--yellow)"></i><b>Генеративная графика</b><span>код, который рисует</span></li>
-      <li><i class="d" style="background:var(--pink)"></i><b>Звук</b><span>звук как материал</span></li>
-      <li><i class="d" style="background:var(--blue)"></i><b>3D</b><span>объекты в трёх измерениях</span></li>
-      <li><i class="d" style="background:var(--red)"></i><b>Данные и датчики</b><span>измерения мира как материал</span></li>
-      <li><i class="d" style="background:var(--ink)"></i><b>Финальный проект</b><span>сборка и показ</span></li>
-    </ol>
-    <p class="note">Темы четвёртой и пятой недель уточняются.</p>
+    <section id="program">
+      <h2>Программа</h2>
+      <!-- Блоки 1–3 названы автором курса; 4 и 5 — предложение, не подтверждено -->
+      <ol class="weeks">
+        <li tabindex="0"><i class="d" style="background:var(--yellow)"></i><b>Генеративная графика</b><span>код, который рисует</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--pink)"></i><b>Звук</b><span>звук как материал</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--blue)"></i><b>3D</b><span>объекты в трёх измерениях</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--red)"></i><b>Данные и датчики</b><span>измерения мира как материал</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--ink)"></i><b>Финальный проект</b><span>сборка и показ</span></li>
+      </ol>
+      <p class="note">Темы четвёртой и пятой недель уточняются.</p>
+    </section>
   </div>
-</section>
+
+  <aside class="story-art" aria-hidden="true">
+    <svg id="mobile" viewBox="0 0 820 660" role="presentation"></svg>
+  </aside>
+</div>
 
 <section id="about">
   <h2>О курсе</h2>
@@ -171,6 +178,274 @@
 </footer>
 
 </div>
+<script>
+(function () {
+  var svg = document.getElementById('mobile');
+  if (!svg) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var INK = '#1b1b1b', RED = '#e8452a', YEL = '#f2b632', PINK = '#ee95b4', BLUE = '#2c4fb8', GREEN = '#7fae3a', LB = '#9ec3dc';
+  var SY = 1.5, CX = 410, TOP = 50;
+
+  function mk(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ---------- shapes: origin = string attach point, hang downward ---------- */
+  function spiral() {
+    var p = 'M0,54', a = 3.3;
+    for (var t = 0.2; t <= 4 * Math.PI; t += 0.22) p += ' L' + (a * t * Math.cos(t)).toFixed(1) + ',' + (54 + a * t * Math.sin(t)).toFixed(1);
+    return p;
+  }
+  var dots = '';
+  for (var i = 0; i < 8; i++) { var an = i * Math.PI / 4; dots += '<circle cx="' + (52 * Math.cos(an)).toFixed(1) + '" cy="' + (54 + 52 * Math.sin(an)).toFixed(1) + '" r="3.6" fill="' + INK + '"/>'; }
+  var SH = {
+    spiral: { h: 100, svg: '<circle cx="0" cy="54" r="46" fill="' + YEL + '"/><path d="' + spiral() + '" fill="none" stroke="' + INK + '" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>' },
+    leaf: { h: 124, svg: '<path d="M0,6 C48,30 48,92 0,124 C-48,92 -48,30 0,6 Z" fill="' + PINK + '"/><path d="M-24,46 q12,-14 24,0 t24,0" fill="none" stroke="' + BLUE + '" stroke-width="3.5" stroke-linecap="round"/><path d="M-26,70 q13,-14 26,0 t26,0" fill="none" stroke="' + INK + '" stroke-width="3" stroke-linecap="round"/><path d="M-20,94 q10,-12 20,0 t20,0" fill="none" stroke="' + BLUE + '" stroke-width="3.5" stroke-linecap="round"/>' },
+    cube: { h: 100, svg: '<path d="M0,10 L40,32 L0,54 L-40,32 Z" fill="' + LB + '" stroke="' + INK + '" stroke-width=".8"/><path d="M-40,32 L0,54 L0,100 L-40,78 Z" fill="' + BLUE + '" stroke="' + INK + '" stroke-width=".8"/><path d="M0,54 L40,32 L40,78 L0,100 Z" fill="#1f3a8a" stroke="' + INK + '" stroke-width=".8"/>' },
+    sensor: { h: 108, svg: '<circle cx="0" cy="54" r="34" fill="none" stroke="' + RED + '" stroke-width="9"/>' + dots + '<path d="M0,44 V28 M0,64 V80 M-10,54 H-26 M10,54 H26" stroke="' + INK + '" stroke-width="1.4"/><circle cx="0" cy="54" r="10" fill="#fff" stroke="' + INK + '" stroke-width="2"/>' },
+    star: { h: 98, svg: '<g transform="translate(0,56)"><ellipse rx="6" ry="42" fill="' + INK + '"/><ellipse rx="6" ry="42" fill="' + INK + '" transform="rotate(60)"/><ellipse rx="6" ry="42" fill="' + INK + '" transform="rotate(120)"/><circle r="12" fill="' + YEL + '" stroke="' + INK + '" stroke-width="2"/><circle r="4" fill="' + RED + '"/></g>' },
+    blackleaf: { h: 96, svg: '<path d="M0,4 C26,18 30,62 4,96 C-12,74 -22,36 0,4 Z" fill="' + INK + '"/>' },
+    redball: { h: 28, svg: '<circle cx="0" cy="14" r="14" fill="' + RED + '"/>' },
+    tri: { h: 42, svg: '<path d="M0,2 L22,42 L-22,42 Z" fill="' + BLUE + '"/>' },
+    half: { h: 28, svg: '<path d="M-26,2 A26,26 0 0 0 26,2 Z" fill="' + GREEN + '" stroke="' + INK + '" stroke-width="1.2"/>' },
+    ring: { h: 38, svg: '<circle cx="0" cy="20" r="18" fill="none" stroke="' + INK + '" stroke-width="3"/><circle cx="0" cy="20" r="5" fill="' + RED + '"/>' }
+  };
+
+  /* ---------- tree of hanging parts ---------- */
+  function P(shape, o) { o = o || {}; return { t: 'p', sh: SH[shape], week: o.week == null ? null : o.week, child: o.child || null, s: o.s || 1 }; }
+  function B(len, L, R) { return { t: 'b', len: len, L: L, R: R }; }
+  var tree = B(440,
+    { drop: 50, n: B(220,
+      { drop: 150, n: P('spiral', { week: 0, child: { drop: 30, n: P('tri') } }) },
+      { drop: 40, n: P('leaf', { week: 1, child: { drop: 24, n: P('ring') } }) }) },
+    { drop: 40, n: B(260,
+      { drop: 100, n: B(200,
+        { drop: 100, n: P('cube', { week: 2, child: { drop: 30, n: P('blackleaf', { s: .62 }) } }) },
+        { drop: 60, n: P('sensor', { week: 3, child: { drop: 40, n: P('redball') } }) }) },
+      { drop: 70, n: P('star', { week: 4, child: { drop: 34, n: P('half') } }) }) });
+
+  var nodes = [], weekNode = {};
+  function build(n, host, par) {
+    n.par = par; n.a = 0; n.w = 0; n.al = 0; n.ph = Math.random() * 6.28; n.f = 0.22 + Math.random() * 0.28;
+    n.sw = n.t === 'b' ? 0.5 + Math.random() * 0.5 : 0.8 + Math.random() * 0.8;
+    n.amp = n.t === 'b' ? 0.5 : 1.0; n.sT = 1; n.sv = 1;
+    nodes.push(n);
+    n.g = mk('g', {}, host);
+    if (n.t === 'b') {
+      n.lineG = mk('g', {}, n.g);
+      mk('line', { x1: -n.len / 2, y1: 0, x2: n.len / 2, y2: 0, stroke: INK, 'stroke-width': 3, 'stroke-linecap': 'round' }, n.lineG);
+      mk('circle', { cx: 0, cy: 0, r: 4.5, fill: INK }, n.g);
+      ['L', 'R'].forEach(function (k) { hang(n[k], n.g, n); });
+    } else {
+      n.rot = mk('g', {}, n.g);
+      n.sc = mk('g', { 'class': 'pc' }, n.rot);
+      var inner = mk('g', n.s !== 1 ? { transform: 'scale(' + n.s + ')' } : {}, n.sc);
+      inner.innerHTML = n.sh.svg;
+      n.hc = n.sh.h * n.s / 2; n.hh = n.sh.h * n.s;
+      if (n.week != null) { weekNode[n.week] = n; n.sc.classList.add('hit'); }
+      if (n.child) {
+        var c = n.child;
+        c.w = mk('g', { transform: 'translate(0,' + n.hh + ')' }, n.rot);
+        mk('line', { x1: 0, y1: 0, x2: 0, y2: c.drop * SY, stroke: INK, 'stroke-width': 1.2 }, c.w);
+        build(c.n, mk('g', { transform: 'translate(0,' + c.drop * SY + ')' }, c.w), n);
+      }
+    }
+  }
+  function hang(side, host, par) {
+    side.w = mk('g', {}, host);
+    mk('line', { x1: 0, y1: 0, x2: 0, y2: side.drop * SY, stroke: INK, 'stroke-width': 1.2 }, side.w);
+    build(side.n, mk('g', { transform: 'translate(0,' + side.drop * SY + ')' }, side.w), par);
+  }
+  mk('line', { x1: CX, y1: 0, x2: CX, y2: TOP, stroke: INK, 'stroke-width': 1.4 }, svg);
+  mk('circle', { cx: CX, cy: 4, r: 4, fill: 'none', stroke: INK, 'stroke-width': 1.4 }, svg);
+  build(tree, mk('g', { transform: 'translate(' + CX + ',' + TOP + ')' }, svg), null);
+
+  /* ---------- layout (also stores world positions for the pointer) ---------- */
+  function layout(n, X, Y, Phi) {
+    n.X = X; n.Y = Y;
+    if (n.t === 'b') {
+      n.lineG.setAttribute('transform', 'rotate(' + (n.a * 57.2958).toFixed(2) + ')');
+      var c = Math.cos(n.a), s = Math.sin(n.a), h = n.len / 2;
+      side(n.L, -h * c, -h * s); side(n.R, h * c, h * s);
+    } else {
+      var tot = Phi + n.a, st = Math.sin(tot), ct = Math.cos(tot);
+      n.rot.setAttribute('transform', 'rotate(' + (n.a * 57.2958).toFixed(2) + ')');
+      n.cx = X - n.hc * st; n.cy = Y + n.hc * ct;
+      if (n.child) {
+        var d = n.hh + n.child.drop * SY;
+        layout(n.child.n, X - d * st, Y + d * ct, tot);
+      }
+    }
+    function side(sd, ex, ey) {
+      sd.w.setAttribute('transform', 'translate(' + ex.toFixed(2) + ',' + ey.toFixed(2) + ')');
+      layout(sd.n, X + ex, Y + ey + sd.drop * SY, 0);
+    }
+  }
+
+  /* ---------- physics ---------- */
+  function step(dt, t) {
+    nodes.forEach(function (n) {
+      var k = n.t === 'b' ? 9 : 14, c = n.t === 'b' ? 0.9 : 1.15;
+      var cp = n.par ? (n.t === 'b' ? 0.25 : 0.7) * n.par.al : 0;
+      var al = -k * n.a - c * n.w + n.amp * Math.sin(t * n.f * 6.283 + n.ph) - cp;
+      n.al = al; n.w += al * dt;
+      if (n.w > 6) n.w = 6; else if (n.w < -6) n.w = -6;
+      n.a += n.w * dt;
+      var lim = n.t === 'b' ? 0.32 : 1.1;
+      if (n.a > lim) { n.a = lim; n.w *= -0.3; } else if (n.a < -lim) { n.a = -lim; n.w *= -0.3; }
+    });
+  }
+  function scales(dt) {
+    var f = 1 - Math.exp(-dt * 9);
+    nodes.forEach(function (n) {
+      if (n.t !== 'p') return;
+      n.sv += (n.sT - n.sv) * f;
+      n.sc.setAttribute('transform', Math.abs(n.sv - 1) < 0.002 ? '' : 'translate(0,' + n.hc + ') scale(' + n.sv.toFixed(3) + ') translate(0,' + (-n.hc) + ')');
+    });
+  }
+
+  /* ---------- pointer ---------- */
+  function toSvg(x, y) {
+    var m = svg.getScreenCTM();
+    if (!m) return { x: -999, y: -999 };
+    var pt = svg.createSVGPoint(); pt.x = x; pt.y = y;
+    return pt.matrixTransform(m.inverse());
+  }
+  var last = null, pcx = -9999, pcy = -9999, R = 110;
+  function clamp(v, m) { return v > m ? m : v < -m ? -m : v; }
+  function push(p, dx, dy) {
+    dx = clamp(dx, 60); dy = clamp(dy, 60);
+    nodes.forEach(function (n) {
+      var nx = n.t === 'b' ? n.X : n.cx, ny = n.t === 'b' ? n.Y : n.cy;
+      if (nx == null) return;
+      var d = Math.sqrt((p.x - nx) * (p.x - nx) + (p.y - ny) * (p.y - ny));
+      if (d > R) return;
+      var f = Math.pow(1 - d / R, 1.5);
+      if (n.t === 'b') n.w += 0.0075 * (((p.x - n.X) * dy - (p.y - n.Y) * dx) / (n.len / 2)) * f;
+      else n.w += -0.014 * dx * f + 0.003 * dy * (nx > p.x ? 1 : -1) * f;
+    });
+  }
+  if (!reduce) {
+    window.addEventListener('pointermove', function (e) {
+      pcx = e.clientX; pcy = e.clientY;
+      var p = toSvg(e.clientX, e.clientY);
+      if (last) { var dx = p.x - last.x, dy = p.y - last.y; if (dx * dx + dy * dy > 0.01) push(p, dx, dy); }
+      last = p;
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', function () { last = null; pcx = pcy = -9999; });
+    nodes.forEach(function (n) {
+      if (n.t !== 'p') return;
+      n.sc.addEventListener('pointerdown', function (e) {
+        var p = toSvg(e.clientX, e.clientY), dir = p.x >= n.cx ? 1 : -1;
+        n.w += dir * 3.2; if (n.par) n.par.w += dir * 0.9;
+      });
+    });
+    var lastY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      var d = clamp(window.scrollY - lastY, 120); lastY = window.scrollY;
+      nodes.forEach(function (n) { n.w += -d * 0.0045 * n.sw; });
+    }, { passive: true });
+  }
+
+  /* ---------- text <-> mobile link: weeks ---------- */
+  var rows = [].slice.call(document.querySelectorAll('#program .weeks li'));
+  var hov = null, scr = null, cur = null;
+  function apply() {
+    var a = hov != null ? hov : scr;
+    if (a === cur) return;
+    cur = a;
+    document.body.classList.toggle('has-active', a != null);
+    rows.forEach(function (li, i) { li.classList.toggle('on', i === a); });
+    for (var w in weekNode) {
+      var n = weekNode[w];
+      n.sT = (a != null && +w === a) ? 1.22 : 1;
+      n.sc.classList.toggle('dim', a != null && +w !== a);
+    }
+    if (a != null && !reduce && weekNode[a]) { weekNode[a].w += (Math.random() < .5 ? -1 : 1) * 2.4; if (weekNode[a].par) weekNode[a].par.w += 0.4; }
+    if (reduce) scales(1);
+  }
+  function fromScroll() {
+    if (!rows.length) return;
+    var vh = window.innerHeight, best = null, bd = 1e9;
+    rows.forEach(function (li, i) {
+      var r = li.getBoundingClientRect(), d = Math.abs(r.top + 40 - vh * 0.45);
+      if (d < bd) { bd = d; best = i; }
+    });
+    var f = rows[0].getBoundingClientRect(), l = rows[rows.length - 1].getBoundingClientRect();
+    scr = (f.top < vh * 0.62 && l.bottom > vh * 0.3) ? best : null;
+    apply();
+  }
+  window.addEventListener('scroll', fromScroll, { passive: true });
+  window.addEventListener('resize', fromScroll);
+  rows.forEach(function (li, i) {
+    ['mouseenter', 'focus'].forEach(function (ev) { li.addEventListener(ev, function () { hov = i; apply(); }); });
+    ['mouseleave', 'blur'].forEach(function (ev) { li.addEventListener(ev, function () { hov = null; apply(); }); });
+  });
+  for (var wk in weekNode) (function (i, n) {
+    n.sc.addEventListener('mouseenter', function () { hov = i; apply(); });
+    n.sc.addEventListener('mouseleave', function () { hov = null; apply(); });
+  })(+wk, weekNode[wk]);
+
+  /* ---------- headline letters lean away from the pointer ---------- */
+  var h1 = document.getElementById('title'), letters = [];
+  if (h1) {
+    var text = h1.textContent;
+    h1.setAttribute('aria-label', text);
+    h1.textContent = '';
+    text.split(' ').forEach(function (word, wi) {
+      var ws = document.createElement('span'); ws.className = 'w'; ws.setAttribute('aria-hidden', 'true');
+      word.split('').forEach(function (ch) {
+        var sp = document.createElement('span'); sp.className = 'ch'; sp.textContent = ch; ws.appendChild(sp);
+        letters.push({ el: sp, x: 0, y: 0, r: 0, vx: 0, vy: 0, vr: 0, px: 0, py: 0 });
+      });
+      if (wi) h1.appendChild(document.createTextNode(' '));
+      h1.appendChild(ws);
+    });
+  }
+  function measure() {
+    letters.forEach(function (l) { l.el.style.transform = ''; });
+    letters.forEach(function (l) {
+      var r = l.el.getBoundingClientRect();
+      l.px = r.left + r.width / 2 + window.scrollX; l.py = r.top + r.height / 2 + window.scrollY;
+    });
+  }
+  function letterStep(dt) {
+    var damp = Math.exp(-dt * 9);
+    letters.forEach(function (l) {
+      var cx = l.px - window.scrollX, cy = l.py - window.scrollY, dx = cx - pcx, dy = cy - pcy, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      var f = d < 140 ? 1 - d / 140 : 0;
+      var tx = dx / d * f * 18, ty = dy / d * f * 18, tr = (dx / 140) * f * 38;
+      l.vx += (tx - l.x) * 140 * dt; l.vy += (ty - l.y) * 140 * dt; l.vr += (tr - l.r) * 140 * dt;
+      l.vx *= damp; l.vy *= damp; l.vr *= damp;
+      l.x += l.vx * dt; l.y += l.vy * dt; l.r += l.vr * dt;
+      l.el.style.transform = (Math.abs(l.x) + Math.abs(l.y) + Math.abs(l.r) < 0.02) ? '' : 'translate(' + l.x.toFixed(2) + 'px,' + l.y.toFixed(2) + 'px) rotate(' + l.r.toFixed(2) + 'deg)';
+    });
+  }
+  window.addEventListener('resize', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  measure();
+
+  /* ---------- loop ---------- */
+  layout(tree, CX, TOP, 0);
+  fromScroll();
+  if (reduce) return;
+  var raf = 0, lastT = 0, story = document.querySelector('.story');
+  function frame(ts) {
+    raf = requestAnimationFrame(frame);
+    var t = ts / 1000, dt = Math.min(0.033, t - lastT || 0.016);
+    lastT = t;
+    step(dt, t); layout(tree, CX, TOP, 0); scales(dt); letterStep(dt);
+  }
+  function run(on) { if (on && !raf) { lastT = 0; raf = requestAnimationFrame(frame); } else if (!on && raf) { cancelAnimationFrame(raf); raf = 0; } }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { run(en[0].isIntersecting); }).observe(story);
+  else run(true);
+})();
+</script>
+
 <div class="cursor-dot" aria-hidden="true"></div>
 <script>
   (function () {
