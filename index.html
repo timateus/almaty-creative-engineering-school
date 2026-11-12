@@ -104,7 +104,7 @@
 
 <nav>
   <div>Almaty Creative Engineering School</div>
-  <div class="links"><a href="mailto:timnosov@gmail.com">Email</a><a href="https://t.me/star_makerr" target="_blank" rel="noopener">Telegram&nbsp;↗</a><span class="lang" role="group" aria-label="Язык / Language"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button></span></div>
+  <div class="links"><a href="mailto:timnosov@gmail.com">Email</a><a href="https://t.me/star_makerr" target="_blank" rel="noopener">Telegram&nbsp;↗</a><span class="lang" role="group" aria-label="Язык / Тіл / Language"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="kk" aria-pressed="false">KK</button><button type="button" data-lang="en" aria-pressed="false">EN</button></span></div>
 </nav>
 
 <div class="story">
@@ -416,15 +416,31 @@
     h_details: 'Details', d_format: 'Format', d_format_v: 'online, 5 weeks', d_age: 'Age', d_age_v: '14–19 years old', d_price: 'Price', d_price_v: '50,000 KZT',
     join: 'To enroll or ask a question, write to us:', or: 'or'
   };
+  var KK = {
+    title: 'Шығармашылық инженерия',
+    lead: 'Жасөспірімдерге арналған онлайн-курс, <span style="white-space:nowrap">14–19 жас</span>. Бес апта, бес тақырып және соңында өз жобаңыз.',
+    h_program: 'Бағдарлама', w1b: 'Генеративті графика', w1s: 'сурет салатын код', w2b: 'Өнер ретіндегі математика', w2s: 'формулалар, симметрия, өрнектер',
+    w3b: '3D', w3s: 'үш өлшемдегі нысандар', w4b: 'AI арқылы экология', w4s: 'табиғатты көрудің жолы ретінде AI',
+    w5b: 'Қорытынды жоба', w5s: 'жинау және көрсету',
+    h_about: 'Курс туралы', about1: 'Бұл технологияға гуманитарлық көзқараспен қарайтын курс: біз оған инженер, суретші және сыншы ретінде қараймыз. Әр аптада жаңа құрал мен шағын жұмыс болады.',
+    about2: 'Қорытынды жобалар біздің онлайн-галереяда жарияланады.',
+    h_parents: 'Ата-аналарға', p1: 'Инженерлік ойлау', p2: 'Дизайн-ойлау', p3: 'Қиял', p4: 'Бағдарламалау дағдылары', p5: 'Үздік университеттерге түсуге арналған портфолиодағы жоба',
+    h_team: 'Жүргізушілер', n_tim: 'Тимофей Носов', alt_tim: 'Тимофей Носов',
+    bio_tim: 'Инженер, зерттеуші және оқытушы. Бірнеше жыл Yandex-те деректер талдаушыларының командаларын басқарды және Яндекс Карталарында жұмыс істеді; қазір технология мен өнердің тоғысындағы білім беру бағдарламаларын жасайды. Simon Fraser University-де оқыған.',
+    bio_iris: 'Алматылық; бейнелеу өнері бойынша бакалавр (BFA) дәрежесін алған, сонымен қатар бизнес пен өнер тарихын оқыған. Сүйікті материалы — акрил. Кандинский, Ротко және Моне шабыттандырады.',
+    h_details: 'Мәліметтер', d_format: 'Формат', d_format_v: 'онлайн, 5 апта', d_age: 'Жасы', d_age_v: '14–19 жас', d_price: 'Құны', d_price_v: '50 000 ₸',
+    join: 'Жазылу үшін немесе сұрақ қою үшін бізге жазыңыз:', or: 'немесе'
+  };
   var RU = {}, els = [].slice.call(document.querySelectorAll('[data-i]')), alts = [].slice.call(document.querySelectorAll('[data-alt]'));
   els.forEach(function (e) { RU[e.getAttribute('data-i')] = e.innerHTML; });
   alts.forEach(function (e) { RU[e.getAttribute('data-alt')] = e.getAttribute('alt'); });
   var META = {
     ru: { t: 'Креативная инженерия — Almaty Creative Engineering School', d: 'Онлайн-курс для подростков 14–19 лет: пять недель, пять тем и свой проект в конце. Almaty Creative Engineering School.' },
+    kk: { t: 'Шығармашылық инженерия — Almaty Creative Engineering School', d: 'Жасөспірімдерге арналған онлайн-курс, 14–19 жас: бес апта, бес тақырып және соңында өз жобаңыз. Almaty Creative Engineering School.' },
     en: { t: 'Creative Engineering — Almaty Creative Engineering School', d: 'An online course for teens aged 14–19: five weeks, five topics and a project of your own at the end. Almaty Creative Engineering School.' }
   };
   function set(lang) {
-    var D = lang === 'en' ? EN : RU;
+    var D = lang === 'en' ? EN : lang === 'kk' ? KK : RU;
     els.forEach(function (e) { e.innerHTML = D[e.getAttribute('data-i')]; });
     alts.forEach(function (e) { e.setAttribute('alt', D[e.getAttribute('data-alt')]); });
     document.documentElement.lang = lang;
@@ -436,11 +452,10 @@
     window.dispatchEvent(new Event('scroll'));
   }
   [].forEach.call(document.querySelectorAll('.lang button'), function (b) { b.addEventListener('click', function () { set(b.getAttribute('data-lang')); }); });
-  var q = (location.search.match(/[?&]lang=(ru|en)/) || [])[1], saved = null;
+  var q = (location.search.match(/[?&]lang=(ru|kk|en)/) || [])[1], saved = null;
   try { saved = localStorage.getItem('lang'); } catch (e) {}
-  var nav = (navigator.language || 'ru').toLowerCase();
-  var lang = q || saved || (/^(ru|kk|uz|be|uk)/.test(nav) ? 'ru' : 'en');
-  if (lang === 'en') set('en');
+  var lang = q || (saved === 'kk' || saved === 'en' ? saved : 'ru');
+  if (lang !== 'ru') set(lang);
 })();
 </script>
 
