@@ -1,4 +1,492 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="UTF-8"><title>Креативная инженерия</title>
-<meta http-equiv="refresh" content="0; url=creative-engineering-quiet-ru.html"></head>
-<body><a href="creative-engineering-quiet-ru.html">Креативная инженерия</a></body></html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Креативная инженерия — Almaty Creative Engineering School</title>
+<meta name="description" content="Онлайн-курс для подростков 14–19 лет: пять недель, пять тем и свой проект в конце. Almaty Creative Engineering School.">
+<meta property="og:title" content="Креативная инженерия — Almaty Creative Engineering School">
+<meta property="og:description" content="Онлайн-курс для подростков 14–19 лет: пять недель, пять тем и свой проект в конце.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f4f5f3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='%234a2fe0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f5f3; --ink: #1b1b1b; --gray: #67645c;
+    --red: #e8452a; --ptr: #4a2fe0; --yellow: #f2b632; --pink: #ee95b4; --blue: #2c4fb8;
+    --g: 24px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--yellow); }
+  a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+  svg { display: block; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 var(--g); }
+  .gray { color: var(--gray); }
+
+  .cursor-dot { position: fixed; left: 0; top: 0; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--ptr); mix-blend-mode: multiply; box-shadow: -2px 0 0 rgba(255,30,120,.8), 2px 0 0 rgba(0,175,255,.8); pointer-events: none; z-index: 3000; opacity: 0; will-change: transform; }
+  .cursor-dot.on { opacity: 1; }
+  .trail { position: fixed; left: 0; top: 0; width: 0; height: 0; pointer-events: none; z-index: 2999; }
+  .trail .line { position: absolute; height: 2px; background: var(--ptr); mix-blend-mode: multiply; transform-origin: 0 50%; pointer-events: none; }
+  @media (hover: none), (pointer: coarse) { .cursor-dot, .trail { display: none; } }
+  nav { display: flex; justify-content: space-between; gap: 16px; padding: var(--g) 0; font-size: 15px; }
+  nav .links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 20px; }
+  nav .links a { white-space: nowrap; }
+  .lang { display: inline-flex; gap: 2px; }
+  .lang button { font: inherit; color: var(--gray); background: none; border: 0; padding: 0 4px; cursor: pointer; text-decoration: none; }
+  .lang button[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; }
+  .lang button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+  .story { position: relative; z-index: 1; }
+  .story-text { max-width: 540px; }
+  #flow, #bloom { position: fixed; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  #bloom { filter: blur(10px) saturate(1.4); mix-blend-mode: multiply; opacity: .45; }
+  nav, section, footer { position: relative; z-index: 1; }
+  h1 { color: var(--ink); text-shadow: calc(var(--ca, 1.2px) * -1) 0 rgba(255, 40, 110, .55), var(--ca, 1.2px) 0 rgba(0, 170, 255, .55); }
+  .story-text { padding-bottom: 26vh; }
+  .hero { min-height: 68vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0 48px; }
+  h1 { font-family: 'Unbounded', 'Onest', sans-serif; font-weight: 500; font-size: clamp(28px, 4.2vw, 56px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 28px; text-wrap: balance; }
+  h1 .w { display: inline-block; white-space: nowrap; }
+  h1 .ch { display: inline-block; will-change: transform; }
+  .hero p { margin: 0; max-width: 24em; font-size: 20px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  section { padding: 20px 0 0; margin-top: 88px; display: grid; grid-template-columns: 1fr 2fr; gap: var(--g); }
+  h2 { font-family: 'Onest', sans-serif; font-weight: 500; font-size: 15px; margin: 4px 0 0; color: var(--gray); }
+  .weeks { margin: 0; padding: 0; list-style: none; }
+  #program { display: block; margin-top: 2vh; padding-top: 0; }
+  #program h2 { margin: 0 0 4vh; }
+  .weeks li { display: grid; grid-template-columns: 22px 1fr; column-gap: 16px; align-items: baseline; padding: 0 0 18px; outline: none; }
+  .weeks li b, .weeks li span { grid-column: 2; }
+  .weeks .d { grid-row: 1; grid-column: 1; width: 12px; height: 12px; border-radius: 50%; align-self: center; transition: transform .35s; }
+  #program .weeks li { padding-bottom: 9vh; transition: opacity .35s; }
+  .has-active #program .weeks li:not(.on) { opacity: .38; }
+  #program .weeks li.on .d { transform: scale(1.7); }
+  #program .weeks li:focus-visible b { outline: 3px solid var(--blue); outline-offset: 4px; }
+  .weeks b { font-weight: 500; font-size: 22px; letter-spacing: -.01em; }
+  .weeks span { color: var(--gray); font-size: 16px; }
+  .body p { margin: 0 0 16px; max-width: 30em; }
+  .people { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .people { align-items: start; }
+  .person img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; display: block; margin: 0 0 16px; }
+  .person h3 { font-family: 'Onest', sans-serif; font-weight: 500; font-size: 24px; letter-spacing: -.01em; margin: 0 0 8px; }
+  .person p { margin: 0; font-size: 16px; line-height: 1.55; }
+  dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 28px; }
+  dt { color: var(--gray); }
+  dd { margin: 0; }
+  .join { font-size: 22px; margin: 28px 0 0; }
+
+  footer { margin-top: 120px; padding: 20px 0 32px; font-size: 14px; color: var(--gray); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 800px) {
+    :root { --g: 20px; }
+    .hero { min-height: 62vh; padding-top: 12vh; }
+    #bloom { opacity: .7; }
+    #flow { opacity: .85; }
+    #program .weeks li { padding-bottom: 7vh; }
+    section { grid-template-columns: 1fr; gap: 12px; margin-top: 64px; }
+    .people { grid-template-columns: 1fr; gap: 36px; }
+    dl { grid-template-columns: 1fr; gap: 0; }
+    dd { margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="flow" aria-hidden="true"></canvas>
+<canvas id="bloom" aria-hidden="true"></canvas>
+<div class="wrap">
+
+<nav>
+  <div>Almaty Creative Engineering School</div>
+  <div class="links"><a href="mailto:timnosov@gmail.com">Email</a><a href="https://t.me/star_makerr" target="_blank" rel="noopener">Telegram&nbsp;↗</a><span class="lang" role="group" aria-label="Язык / Language"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button></span></div>
+</nav>
+
+<div class="story">
+  <div class="story-text">
+    <header class="hero">
+      <h1 id="title" data-i="title">Креативная инженерия</h1>
+      <p data-i="lead">Онлайн-курс для подростков <span style="white-space:nowrap">14–19 лет</span>. Пять недель, пять тем и свой проект в конце.</p>
+    </header>
+
+    <section id="program">
+      <h2 data-i="h_program">Программа</h2>
+      <ol class="weeks">
+        <li tabindex="0"><i class="d" style="background:var(--yellow)"></i><b data-i="w1b">Генеративная графика</b><span data-i="w1s">код, который рисует</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--pink)"></i><b data-i="w2b">Математика как искусство</b><span data-i="w2s">формулы, симметрия, узоры</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--blue)"></i><b data-i="w3b">3D</b><span data-i="w3s">объекты в трёх измерениях</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--red)"></i><b data-i="w4b">Экология через AI</b><span data-i="w4s">AI как способ увидеть природу</span></li>
+        <li tabindex="0"><i class="d" style="background:var(--ink)"></i><b data-i="w5b">Финальный проект</b><span data-i="w5s">сборка и показ</span></li>
+      </ol>
+    </section>
+  </div>
+
+</div>
+
+<section id="about">
+  <h2 data-i="h_about">О курсе</h2>
+  <div class="body">
+    <p data-i="about1">Курс о технологиях с гуманитарным углом: мы смотрим на них как инженеры, художники и критики. Каждую неделю новый инструмент и небольшая работа.</p>
+    <p data-i="about2">Итоговые проекты публикуются в нашей онлайн-галерее.</p>
+  </div>
+</section>
+
+<section id="parents">
+  <h2 data-i="h_parents">Родителям</h2>
+  <ul class="weeks">
+    <li><i class="d" style="background:var(--yellow)"></i><b data-i="p1">Инженерное мышление</b></li>
+    <li><i class="d" style="background:var(--pink)"></i><b data-i="p2">Дизайн-мышление</b></li>
+    <li><i class="d" style="background:var(--blue)"></i><b data-i="p3">Воображение</b></li>
+    <li><i class="d" style="background:var(--red)"></i><b data-i="p4">Навыки программирования</b></li>
+    <li><i class="d" style="background:var(--ink)"></i><b data-i="p5">Проект в портфолио для поступления в топовые университеты</b></li>
+  </ul>
+</section>
+
+<section id="team">
+  <h2 data-i="h_team">Ведущие</h2>
+  <div class="people">
+    <article class="person">
+      <img src="img/timofey-nosov.jpg" alt="Тимофей Носов" data-alt="alt_tim" width="900" height="900">
+      <h3 data-i="n_tim">Тимофей Носов</h3>
+      <p data-i="bio_tim">Инженер, исследователь и преподаватель. Несколько лет руководил командами аналитиков данных в Yandex и работал над Яндекс Картами, а сегодня делает образовательные программы на стыке технологий и искусства. Учился в Simon Fraser University.</p>
+    </article>
+    <article class="person">
+      <h3>Iris Kazhmurat</h3>
+      <p data-i="bio_iris">Родом из Алматы, окончила бакалавриат по изобразительному искусству (BFA); дополнительно изучала бизнес и историю искусства. Любимый материал — акрил. Вдохновляется Кандинским, Ротко и Моне.</p>
+    </article>
+  </div>
+</section>
+
+<section id="details">
+  <h2 data-i="h_details">Детали</h2>
+  <div>
+    <dl>
+      <dt data-i="d_format">Формат</dt><dd data-i="d_format_v">онлайн, 5 недель</dd>
+      <dt data-i="d_age">Возраст</dt><dd data-i="d_age_v">14–19 лет</dd>
+      <dt data-i="d_price">Стоимость</dt><dd data-i="d_price_v">50 000 ₸</dd>
+    </dl>
+    <p class="join"><span data-i="join">Чтобы записаться или задать вопрос, напишите нам:</span> <a href="mailto:timnosov@gmail.com">timnosov@gmail.com</a> <span data-i="or">или</span> <a href="https://t.me/star_makerr" target="_blank" rel="noopener">Telegram&nbsp;↗</a></p>
+  </div>
+</section>
+
+<footer>
+  <div>Almaty Creative Engineering School</div>
+  <div>© 2026</div>
+</footer>
+
+</div>
+<script>
+(function () {
+  var cv = document.getElementById('flow'), bl = document.getElementById('bloom');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d'), bctx = bl.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var small = window.matchMedia('(max-width: 800px)').matches;
+  var N = small ? 1000 : 2600;
+  var dpr = Math.min(window.devicePixelRatio || 1, small ? 1 : 1.5);
+  var W = 0, H = 0, S = 1, baseCX = 0, baseCY = 0, CX = 0, CY = 0;
+  var X = new Float32Array(N), Y = new Float32Array(N), PX = new Float32Array(N), PY = new Float32Array(N);
+  var VX = new Float32Array(N), VY = new Float32Array(N), L = new Float32Array(N);
+  var SP = new Float32Array(N), U = new Float32Array(N), K = new Uint8Array(N);
+  var TAU = 6.2832;
+
+  /* ---- curl-like flow field from a sum of travelling waves ---- */
+  var waves = [[1, .3, .40, 0, 1], [-.4, 1, .33, 1.7, .9], [.8, .9, .50, 3.1, .7], [-1, .6, .27, 4.4, .8], [.3, -1.2, .60, 2.2, .6]];
+  var ns = 2.4;     // spatial scale (1/S units)
+  function flow(x, y, t, out) {
+    var fx = 0, fy = 0, f = ns / S;
+    for (var i = 0; i < waves.length; i++) {
+      var w = waves[i], c = Math.cos((w[0] * x + w[1] * y) * f + w[2] * t + w[3]) * w[4];
+      fx += c * w[1]; fy -= c * w[0];
+    }
+    out[0] = fx; out[1] = fy;
+  }
+
+  /* ---- modes: free flow + four shaped states tied to the five weeks ---- */
+  var mode = 0, m = 0, mT = 0;
+  var presets = [
+    { spd: 1.0, sw: 0.9 },   // 0 generative graphics: free strands
+    { spd: 0.8, sw: 0.4 },   // 1 math as art: graph of a sine
+    { spd: 0.9, sw: 0.3 },   // 2 3D: rotating torus
+    { spd: 1.0, sw: 0.2 },   // 3 ecology: terrain contours
+    { spd: 1.1, sw: 0.7 }    // 4 final: lissajous knot
+  ];
+  var P = { spd: 1.0, sw: 0.9 };
+  function target(i, t, out) {
+    var u = U[i], k = K[i];
+    if (mode === 1) {
+      // graph of a sine: curve + axes + ticks
+      var c = k % 10, lam = S * 0.8, amp = S * 0.34, gx = (u - 0.5) * S * 1.9;
+      if (c <= 6) { out[0] = CX + gx; out[1] = CY - amp * Math.sin(TAU * gx / lam - t * 0.9); }
+      else if (c === 7) { out[0] = CX + gx; out[1] = CY; }
+      else if (c === 8) { out[0] = CX - S * 0.95; out[1] = CY + (u - 0.5) * amp * 2.7; }
+      else { var n = Math.floor(u * 5) - 2, fr = (u * 5) % 1; out[0] = CX + n * lam / 2; out[1] = CY + (fr - 0.5) * S * 0.08; }
+    } else if (mode === 2) {
+      var v = ((i * 0.61803) % 1) * TAU, R0 = S * 0.62, r = S * 0.26;
+      var x3 = (R0 + r * Math.cos(v)) * Math.cos(u * TAU), y3 = (R0 + r * Math.cos(v)) * Math.sin(u * TAU), z3 = r * Math.sin(v);
+      var ax = t * 0.35 + rotX, ay = t * 0.5 + rotY;
+      var y2 = y3 * Math.cos(ax) - z3 * Math.sin(ax), z2 = y3 * Math.sin(ax) + z3 * Math.cos(ax);
+      var x2 = x3 * Math.cos(ay) + z2 * Math.sin(ay);
+      out[0] = CX + x2; out[1] = CY + y2;
+    } else if (mode === 3) {
+      var row = k % 16, gx = (u - 0.5) * S * 2.0;
+      var gy = (row - 7.5) * S * 0.12 + S * 0.10 * Math.sin(u * TAU * 2 + t * 0.5 + row * 0.35) + S * 0.05 * Math.sin(u * TAU * 5 - t * 0.8 + row * 0.9);
+      out[0] = CX + gx; out[1] = CY + gy;
+    } else if (mode === 4) {
+      var s = u * TAU;
+      out[0] = CX + S * 0.95 * Math.sin(3 * s + t * 0.3);
+      out[1] = CY + S * 0.7 * Math.sin(2 * s + t * 0.2) + S * 0.2 * Math.sin(5 * s);
+    } else { out[0] = CX; out[1] = CY; }
+  }
+
+  /* ---- sizing and particles ---- */
+  function size() {
+    W = cv.width = Math.round(window.innerWidth * dpr);
+    H = cv.height = Math.round(window.innerHeight * dpr);
+    bl.width = Math.max(2, Math.round(W / 4)); bl.height = Math.max(2, Math.round(H / 4));
+    S = Math.min(W, H) * (small ? 0.36 : 0.4);
+    baseCX = W * (small ? 0.5 : 0.68); baseCY = H * (small ? 0.3 : 0.5);
+    CX = baseCX; CY = baseCY;
+    ctx.clearRect(0, 0, W, H);
+  }
+  function gauss() { return (Math.random() + Math.random() + Math.random() - 1.5) / 1.5; }
+  var sp2 = [0, 0];
+  function spawn(i) {
+    if (mode !== 0 && m > 0.4) {          // shaped state: reappear on the form, not in a burst from the core
+      target(i, tt, sp2);
+      X[i] = PX[i] = sp2[0] + gauss() * 6 * dpr; Y[i] = PY[i] = sp2[1] + gauss() * 6 * dpr;
+    } else {
+      var a = Math.random() * TAU, r = Math.abs(gauss()) * S * 0.38;
+      X[i] = PX[i] = CX + Math.cos(a) * r; Y[i] = PY[i] = CY + Math.sin(a) * r;
+    }
+    VX[i] = VY[i] = 0; L[i] = 120 + Math.random() * 380;
+  }
+  for (var i = 0; i < N; i++) { SP[i] = 0.6 + Math.random() * 0.8; U[i] = Math.random(); K[i] = (Math.random() * 255) | 0; }
+  size();
+  for (i = 0; i < N; i++) spawn(i);
+  window.addEventListener('resize', function () { size(); for (var i = 0; i < N; i++) spawn(i); });
+
+  /* ---- input ---- */
+  var ptrX = -9999, ptrY = -9999, lpx = 0, lpy = 0, pvx = 0, pvy = 0, rotX = 0, rotY = 0, rX = 0, rY = 0;
+  var sv = 0, lastScroll = window.scrollY, burst = null;
+  window.addEventListener('pointermove', function (e) {
+    var x = e.clientX * dpr, y = e.clientY * dpr;
+    if (ptrX > -9000) { pvx = x - lpx; pvy = y - lpy; }
+    ptrX = lpx = x; ptrY = lpy = y;
+    rX = (y / H - 0.5) * 1.3; rY = (x / W - 0.5) * 1.3;
+  }, { passive: true });
+  document.documentElement.addEventListener('mouseleave', function () { ptrX = ptrY = -9999; });
+  window.addEventListener('pointerdown', function (e) { burst = { x: e.clientX * dpr, y: e.clientY * dpr, t: 1 }; });
+  window.addEventListener('scroll', function () {
+    var d = Math.abs(window.scrollY - lastScroll); lastScroll = window.scrollY; sv = Math.min(60, sv + d * 0.5);
+    fromScroll();
+  }, { passive: true });
+
+  /* ---- text <-> state link: weeks switch the form of the flow ---- */
+  var rows = [].slice.call(document.querySelectorAll('#program .weeks li'));
+  var hov = null, scr = null, cur = null, h1 = document.getElementById('title');
+  function apply() {
+    var a = hov != null ? hov : scr;
+    if (a === cur) return;
+    cur = a;
+    document.body.classList.toggle('has-active', a != null);
+    rows.forEach(function (li, i) { li.classList.toggle('on', i === a); });
+    var md = a == null ? 0 : a;
+    if (md !== mode) { mode = md; mT = mode === 0 ? 0 : 0.85; }
+    var p = presets[md]; P.spdT = p.spd; P.swT = p.sw;
+    if (reduce) settle(150);
+  }
+  function fromScroll() {
+    if (!rows.length) return;
+    var vh = window.innerHeight, best = null, bd = 1e9;
+    rows.forEach(function (li, i) { var r = li.getBoundingClientRect(), d = Math.abs(r.top + 40 - vh * 0.45); if (d < bd) { bd = d; best = i; } });
+    var f = rows[0].getBoundingClientRect(), l = rows[rows.length - 1].getBoundingClientRect();
+    scr = (f.top < vh * 0.62 && l.bottom > vh * 0.3) ? best : null;
+    apply();
+  }
+  rows.forEach(function (li, i) {
+    ['mouseenter', 'focus'].forEach(function (ev) { li.addEventListener(ev, function () { hov = i; apply(); }); });
+    ['mouseleave', 'blur'].forEach(function (ev) { li.addEventListener(ev, function () { hov = null; apply(); }); });
+  });
+  window.addEventListener('resize', fromScroll);
+  P.spdT = P.spd; P.swT = P.sw;
+
+  /* ---- simulation + drawing ---- */
+  var fl = [0, 0], tg = [0, 0], tt = 0, smooth = 0;
+  var OFFS = [[1, 'rgba(255,30,120,'], [0, 'rgba(0,175,255,'], [-1, 'rgba(70,40,230,']];
+  function stepAll(k, t) {
+    // ease global params
+    var e = 1 - Math.pow(0.96, k);
+    P.spd += (P.spdT - P.spd) * e; P.sw += (P.swT - P.sw) * e; m += (mT - m) * (1 - Math.pow(0.97, k));
+    rotX += (rX - rotX) * e; rotY += (rY - rotY) * e;
+    var px = ptrX > -9000 ? ptrX : baseCX, py = ptrX > -9000 ? ptrY : baseCY;
+    CX += (baseCX + (px - baseCX) * 0.06 - CX) * e; CY += (baseCY + (py - baseCY) * 0.06 - CY) * e;
+    var boost = 1 + Math.min(2, sv * 0.04), RP = 240 * dpr, speed = 0.95 * dpr * P.spd * boost;
+    for (var i = 0; i < N; i++) {
+      PX[i] = X[i]; PY[i] = Y[i];
+      var x = X[i], y = Y[i], dx = x - CX, dy = y - CY, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      flow(x, y, t, fl);
+      var dvx = fl[0] * speed * SP[i] * 1.1, dvy = fl[1] * speed * SP[i] * 1.1;
+      // swirl around the core and soft containment
+      var sw = P.sw * speed * 0.9 * Math.min(1, d / (S * 0.35));
+      dvx += -dy / d * sw; dvy += dx / d * sw;
+      if (d > S * 0.62) { var c = (d - S * 0.62) / S * speed * 3.2; dvx -= dx / d * c; dvy -= dy / d * c; }
+      // pointer swirl
+      var qx = x - ptrX, qy = y - ptrY, qd = Math.sqrt(qx * qx + qy * qy);
+      if (qd < RP) {
+        var f = (1 - qd / RP); f *= f;
+        dvx += (-qy / (qd || 1)) * f * 5 * dpr + pvx * f * 0.35; dvy += (qx / (qd || 1)) * f * 5 * dpr + pvy * f * 0.35;
+        dvx -= qx / (qd || 1) * f * 0.8 * dpr; dvy -= qy / (qd || 1) * f * 0.8 * dpr;
+      }
+      if (m > 0.01) {
+        target(i, t, tg);
+        var tx = (tg[0] - x) * 0.07, ty = (tg[1] - y) * 0.07;
+        dvx = dvx * (1 - m) + tx * m; dvy = dvy * (1 - m) + ty * m;
+      }
+      if (burst && burst.t > 0.5) {
+        var bx = x - burst.x, by = y - burst.y, bd2 = Math.sqrt(bx * bx + by * by);
+        if (bd2 < 320 * dpr) { var bf = (1 - bd2 / (320 * dpr)); VX[i] += bx / (bd2 || 1) * bf * 22 * dpr; VY[i] += by / (bd2 || 1) * bf * 22 * dpr; }
+      }
+      VX[i] += (dvx - VX[i]) * 0.12 * k; VY[i] += (dvy - VY[i]) * 0.12 * k;
+      X[i] += VX[i] * k; Y[i] += VY[i] * k;
+      L[i] -= k;
+      if (L[i] <= 0 || X[i] < -50 || X[i] > W + 50 || Y[i] < -50 || Y[i] > H + 50) spawn(i);
+    }
+    if (burst) { burst.t -= 0.5; if (burst.t <= 0) burst = null; }
+    pvx *= 0.8; pvy *= 0.8; sv *= Math.pow(0.94, k);
+  }
+  function draw() {
+    if (!W || !H || !bl.width || !bl.height) return;
+    var ca = (8 + Math.min(14, sv * 0.2)) * dpr;
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,0.055)'; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.lineWidth = 0.8 * dpr; ctx.lineCap = 'round';
+    for (var c = 0; c < 3; c++) {
+      var sh = OFFS[c][0], a = c === 1 ? 0.42 : c === 2 ? 0.4 : 0.4;
+      ctx.strokeStyle = OFFS[c][1] + a + ')';
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) {
+        var o = sh * ca * ((X[i] - CX) / S) + sh * 1.2 * dpr;
+        var oy = sh * ca * ((Y[i] - CY) / S);
+        ctx.moveTo(PX[i] + o, PY[i] + oy); ctx.lineTo(X[i] + o, Y[i] + oy);
+      }
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    bctx.clearRect(0, 0, bl.width, bl.height); bctx.drawImage(cv, 0, 0, bl.width, bl.height);
+    if (h1) h1.style.setProperty('--ca', (1.2 + Math.min(7, sv * 0.12) + Math.min(3, Math.abs(pvx) * 0.05)).toFixed(2) + 'px');
+  }
+  function settle(n) { for (var s = 0; s < n; s++) stepAll(1, tt += 0.016); draw(); }
+
+  fromScroll();
+  if (reduce) { settle(260); return; }
+  var raf = 0, last = 0;
+  function frame(ts) {
+    raf = requestAnimationFrame(frame);
+    var dt = Math.min(0.05, last ? (ts - last) / 1000 : 0.016); last = ts;
+    var k = dt * 60; tt += dt;
+    stepAll(k, tt); draw();
+  }
+  function run(on) { if (on && !raf) { last = 0; raf = requestAnimationFrame(frame); } else if (!on && raf) { cancelAnimationFrame(raf); raf = 0; } }
+  document.addEventListener('visibilitychange', function () { run(!document.hidden); });
+  run(true);
+})();
+</script>
+
+<script>
+(function () {
+  var EN = {
+    title: 'Creative Engineering',
+    lead: 'An online course for teens aged <span style="white-space:nowrap">14–19</span>. Five weeks, five topics and a project of your own at the end.',
+    h_program: 'Program', w1b: 'Generative graphics', w1s: 'code that draws', w2b: 'Math as art', w2s: 'formulas, symmetry, patterns',
+    w3b: '3D', w3s: 'objects in three dimensions', w4b: 'Ecology through AI', w4s: 'AI as a way to see nature',
+    w5b: 'Final project', w5s: 'assembly and showcase',
+    h_about: 'About', about1: 'A course about technology with a humanities angle: we look at it as engineers, artists and critics. Each week brings a new tool and a small piece of work.',
+    about2: 'Final projects are published in our online gallery.',
+    h_parents: 'For parents', p1: 'Engineering thinking', p2: 'Design thinking', p3: 'Imagination', p4: 'Programming skills', p5: 'A portfolio project for applying to top universities',
+    h_team: 'Instructors', n_tim: 'Timofey Nosov', alt_tim: 'Timofey Nosov',
+    bio_tim: 'Engineer, researcher and teacher. Led teams of data analysts at Yandex for several years and worked on Yandex Maps; now builds educational programs at the intersection of technology and art. Studied at Simon Fraser University.',
+    bio_iris: 'From Almaty; earned a BFA in fine art, with additional study in business and art history. Favorite medium is acrylic. Inspired by Kandinsky, Rothko and Monet.',
+    h_details: 'Details', d_format: 'Format', d_format_v: 'online, 5 weeks', d_age: 'Age', d_age_v: '14–19 years old', d_price: 'Price', d_price_v: '50,000 KZT',
+    join: 'To enroll or ask a question, write to us:', or: 'or'
+  };
+  var RU = {}, els = [].slice.call(document.querySelectorAll('[data-i]')), alts = [].slice.call(document.querySelectorAll('[data-alt]'));
+  els.forEach(function (e) { RU[e.getAttribute('data-i')] = e.innerHTML; });
+  alts.forEach(function (e) { RU[e.getAttribute('data-alt')] = e.getAttribute('alt'); });
+  var META = {
+    ru: { t: 'Креативная инженерия — Almaty Creative Engineering School', d: 'Онлайн-курс для подростков 14–19 лет: пять недель, пять тем и свой проект в конце. Almaty Creative Engineering School.' },
+    en: { t: 'Creative Engineering — Almaty Creative Engineering School', d: 'An online course for teens aged 14–19: five weeks, five topics and a project of your own at the end. Almaty Creative Engineering School.' }
+  };
+  function set(lang) {
+    var D = lang === 'en' ? EN : RU;
+    els.forEach(function (e) { e.innerHTML = D[e.getAttribute('data-i')]; });
+    alts.forEach(function (e) { e.setAttribute('alt', D[e.getAttribute('data-alt')]); });
+    document.documentElement.lang = lang;
+    document.title = META[lang].t;
+    [].forEach.call(document.querySelectorAll('meta[name=description],meta[property="og:description"]'), function (m) { m.setAttribute('content', META[lang].d); });
+    [].forEach.call(document.querySelectorAll('meta[property="og:title"]'), function (m) { m.setAttribute('content', META[lang].t); });
+    [].forEach.call(document.querySelectorAll('.lang button'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false'); });
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    window.dispatchEvent(new Event('scroll'));
+  }
+  [].forEach.call(document.querySelectorAll('.lang button'), function (b) { b.addEventListener('click', function () { set(b.getAttribute('data-lang')); }); });
+  var q = (location.search.match(/[?&]lang=(ru|en)/) || [])[1], saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  var nav = (navigator.language || 'ru').toLowerCase();
+  var lang = q || saved || (/^(ru|kk|uz|be|uk)/.test(nav) ? 'ru' : 'en');
+  if (lang === 'en') set('en');
+})();
+</script>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<script>
+  (function () {
+    var dot = document.querySelector('.cursor-dot');
+    if (!dot || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(trail);
+    var prev = null;
+
+    window.addEventListener('mousemove', function (e) {
+      var p = { x: e.clientX, y: e.clientY };
+      dot.style.transform = 'translate3d(' + p.x + 'px,' + p.y + 'px,0)';
+      dot.classList.add('on');
+      if (prev && !calm) trail.appendChild(segment(prev, p));
+      prev = p;
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', function () {
+      dot.classList.remove('on');
+      prev = null;
+    });
+
+    // one straight segment between two pointer positions
+    function segment(a, b) {
+      var el = document.createElement('div');
+      var dx = b.x - a.x, dy = b.y - a.y;
+      el.className = 'line';
+      el.style.width = Math.sqrt(dx * dx + dy * dy) + 'px';
+      el.style.left = a.x + 'px';
+      el.style.top = a.y + 'px';
+      el.style.transform = 'rotate(' + Math.atan2(dy, dx) * 180 / Math.PI + 'deg)';
+      return el;
+    }
+
+    // every 450 ms the trail is wiped, oldest segment first, 10 ms apart
+    setInterval(function () {
+      Array.prototype.slice.call(trail.children).forEach(function (el, i) {
+        setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, i * 10);
+      });
+    }, 450);
+  })();
+</script>
+</body>
+</html>
